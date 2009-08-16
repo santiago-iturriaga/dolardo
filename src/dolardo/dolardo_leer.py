@@ -33,18 +33,15 @@ def leer_cotizaciones():
             if DEBUG:
                 print "Cotización: %s / %s." % (buy, sell)
             
-            print "1"
             db_engine = create_engine(sql_connection)
-            print "2"
             db_session = sessionmaker(bind=db_engine)
-            print "3"
+
             Base.metadata.create_all(db_engine)        
-            print "4"
+            
             session = db_session()
             try:
-                print "5"
                 monedas = session.query(Moneda).filter(Moneda.nombre == nombre_moneda).all()
-                print "6"
+
                 if not monedas:
                     moneda = Moneda(nombre_moneda)
                     session.add(moneda)
@@ -56,7 +53,7 @@ def leer_cotizaciones():
                 session.add(cotizacion)
                 
                 session.commit()
-                error_reporting("Lectura de cotizacion: OK!.")
+                error_reporting.report_error("Lectura de cotizacion: OK!.")
             except:
                 session.rollback()
                 raise

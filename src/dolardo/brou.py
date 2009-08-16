@@ -62,7 +62,8 @@ class BROUHTMLParser(HTMLParser):
                 
                 if DEBUG:
                     #print "'%s'" % value
-                    print value
+                    print data
+                    
                 if DEBUG:
                     print "Conviritendo DATA (listo)"    
                                 

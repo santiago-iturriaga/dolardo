@@ -53,13 +53,12 @@ def leer_cotizaciones():
                 session.add(cotizacion)
                 
                 session.commit()
-                error_reporting.report_error("Lectura de cotizacion: OK!.")
+                error_reporting.report("Lectura de cotizacion: OK!.")
             except:
                 session.rollback()
                 raise
         else:
-            print 'Error leyendo la cotización.'            
-            
+            error_reporting.report("Error leyendo la cotización.")
     except:
         info = sys.exc_info()
         error_reporting.report_error(info)

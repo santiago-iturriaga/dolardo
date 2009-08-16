@@ -7,6 +7,9 @@ Created on Aug 15, 2009
 
 DEBUG = False
 
+sql_connection = "mysql://santiag0_santiag:santiag0@localhost/santiag0_desarrollo"
+#sql_connection = "sqlite:///cotizaciones.db"
+
 #url_brou = "brou-cotizaciones.html"
 url_brou = "http://www.portal.brou.com.uy/web/guest/institucional/cotizaciones"
 nombre_moneda = u'Dólar'

@@ -12,7 +12,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from dolardo import DEBUG, nombre_moneda, brou, Base
+from dolardo import DEBUG, nombre_moneda, brou, Base, sql_connection
 from dolardo.entities.cotizacion import Cotizacion
 from dolardo.entities.moneda import Moneda
 from dolardo import error_reporting
@@ -30,7 +30,7 @@ def leer_cotizaciones():
             if DEBUG:
                 print 'Cotización: %s / %s.' % (buy, sell)
             
-            db_engine = create_engine('sqlite:///cotizaciones.db')
+            db_engine = create_engine(sql_connection)
             db_session = sessionmaker(bind=db_engine)
             
             Base.metadata.create_all(db_engine)        

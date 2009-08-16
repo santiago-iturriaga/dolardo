@@ -1,0 +1,45 @@
+<html>
+<header><title>Dolardo</title></header>
+<body style="background-color: #777777;">
+	<div style="margin:auto; width:720px; 
+				border-left-style:solid; border-left-width:1px; 
+	 			border-right-style:solid; border-right-width:1px; 
+	 			background-color: white; height: 100%%;
+	 			padding-top: 5px;
+	 			padding-left: 10px;
+	 			padding-right: 10px;">
+	 		
+	 	<img src='../images/basic/diagram_64.png' style="float:left; margin-top: 10px;" />	
+		<h1 style="margin-left:70px; font-family: verdana, tahoma, arial;">Dolardo</h1>
+		<p>
+			Cotizaci&oacute;n del D&oacute;lar entre %s y %s seg&uacute;n el <a href='%s'>BROU</a>.
+		</p>
+		<div style="margin:auto; text-align:center;">
+			<img src='%s' />
+		</div>
+		<div style="margin-left: auto; margin-right: 50px; float:right; ">
+			<h2 style="margin-bottom: 0px; padding-bottom: 0px;">Cotizaci&oacute;n actual</h2>
+			<table>
+				<tr>
+					<td>
+						<table cellpadding="5px">
+							<tr>
+								<td style="font-size: large;font-weight:bold;">Compra</td>
+								<td style="font-size: large;">$%s</td>
+							</tr>
+							<tr>
+								<td style="font-size: large;font-weight:bold;">Venta</td>
+								<td style="font-size: large;">$%s</td>
+							</tr>
+						</table>					
+					</td>
+					<td>
+						<img src='%s' />
+					</td>
+				<tr>
+			</table>
+		</div>
+		%s
+	</div>
+</body>
+</html>

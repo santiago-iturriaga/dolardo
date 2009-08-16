@@ -14,7 +14,7 @@ class Moneda(Base):
     __tablename__ = 'monedas'
 
     moneda_id = Column(Integer, primary_key=True)
-    nombre = Column(String)
+    nombre = Column(String(50), nullable=False)
 
     def __init__(self, nombre):
         self.nombre = nombre

@@ -109,10 +109,13 @@ def generar_grafica(inicio, fin, cotizaciones):
         x2.append(int(cotizacion.fecha.strftime(formato_fecha_axis)))
         y2.append(float(cotizacion.venta))
         
-        if len(x) % (len(cotizaciones_buy)/5) == 0:
-            x_axis.append(cotizacion.fecha.strftime(formato_fecha_humano))
+        if len(cotizaciones_buy) >= 5:
+            if len(x) % (len(cotizaciones_buy)/5) == 0:
+                x_axis.append(cotizacion.fecha.strftime(formato_fecha_humano))
+            else:
+                x_axis.append('')
         else:
-            x_axis.append('')
+            x_axis.append(cotizacion.fecha.strftime(formato_fecha_humano))
     
     x_data_index = chart.add_data(x)
     y_data_index = chart.add_data(y)

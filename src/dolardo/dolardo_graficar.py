@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from dolardo import brou, nombre_moneda, Base, DEBUG
+from dolardo import brou, nombre_moneda, Base, DEBUG, sql_connection
 from dolardo.entities.cotizacion import Cotizacion
 from dolardo.entities.moneda import Moneda
 
@@ -26,7 +26,7 @@ def graficar_cotizaciones():
     fin_rango = datetime.now()
     inicio_rango = fin_rango - rango
     
-    db_engine = create_engine('sqlite:///cotizaciones.db')
+    db_engine = create_engine(sql_connection)
     db_session = sessionmaker(bind=db_engine)
     
     #Base.metadata.create_all(db_engine)        

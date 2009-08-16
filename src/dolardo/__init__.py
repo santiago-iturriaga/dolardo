@@ -7,7 +7,8 @@ Created on Aug 15, 2009
 
 DEBUG = False
 
-url_brou = "brou-cotizaciones.html"
+#url_brou = "brou-cotizaciones.html"
+url_brou = "http://www.portal.brou.com.uy/web/guest/institucional/cotizaciones"
 nombre_moneda = u'Dólar'
 
 log_file = 'dolardo.log'

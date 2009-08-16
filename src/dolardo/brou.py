@@ -56,11 +56,14 @@ class BROUHTMLParser(HTMLParser):
     def handle_data(self, data):
         if self.tag_cotizaciones:
             if self.current_value == 'currency'.lower():
+                if DEBUG:
+                    print "Conviritendo DATA"
                 value = data.strip().decode("utf-8", "ignore")
                 
+                #if DEBUG:
+                #    print "'%s'" % value
                 if DEBUG:
-                    print "'%s'" % value
-                
+                    print "Conviritendo DATA (listo)"                
                 self.currency = value
                 self.current_value = None
             elif self.current_value == 'buy'.lower():
@@ -95,7 +98,11 @@ def leer_cotizaciones():
     
     if DEBUG:
         print "Parseando html... (2)"
+        
     parser.feed(html)
+   
+    if DEBUG:
+       print "Parseando html listo..."
     
     return parser.cotizaciones
     

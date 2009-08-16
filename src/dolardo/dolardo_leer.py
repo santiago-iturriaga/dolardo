@@ -28,22 +28,23 @@ def leer_cotizaciones():
             print "Cotizaciones leidas."
         
         if nombre_moneda in cotizaciones:
-            if DEBUG:
-                print "Obtengo cotizacion moneda..."
-                
             (buy, sell) = cotizaciones[nombre_moneda]
             
             if DEBUG:
                 print "Cotización: %s / %s." % (buy, sell)
             
+            print "1"
             db_engine = create_engine(sql_connection)
+            print "2"
             db_session = sessionmaker(bind=db_engine)
-            
+            print "3"
             Base.metadata.create_all(db_engine)        
-            
+            print "4"
             session = db_session()
             try:
+                print "5"
                 monedas = session.query(Moneda).filter(Moneda.nombre == nombre_moneda).all()
+                print "6"
                 if not monedas:
                     moneda = Moneda(nombre_moneda)
                     session.add(moneda)

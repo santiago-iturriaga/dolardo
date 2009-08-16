@@ -65,7 +65,13 @@ def graficar_cotizaciones():
         
         raise
     
-    url = generar_grafica(inicio_rango, fin_rango, rango_cotizaciones)
+    try:
+        url = generar_grafica(inicio_rango, fin_rango, rango_cotizaciones)
+    except:
+        info = sys.exc_info()
+        error_reporting.report_error(info)
+        
+        url = ""
     
     if len(rango_cotizaciones) >= 2:
         delta = rango_cotizaciones[-1].compra - rango_cotizaciones[-2].compra
@@ -149,10 +155,6 @@ def generar_grafica(inicio, fin, cotizaciones):
     
     if DEBUG:
         chart.download('cotizacion.png')
-        
-    try:
-        return chart.get_url()
-    except:
-        return ""
-    
+
+    return chart.get_url()
     

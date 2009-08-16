@@ -49,6 +49,7 @@ def leer_cotizaciones():
                 session.add(cotizacion)
                 
                 session.commit()
+                error_reporting("Lectura de cotizacion: OK!.")
             except:
                 session.rollback()
                 raise

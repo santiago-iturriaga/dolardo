@@ -150,6 +150,9 @@ def generar_grafica(inicio, fin, cotizaciones):
     if DEBUG:
         chart.download('cotizacion.png')
         
-    return chart.get_url()
+    try:
+        return chart.get_url()
+    except:
+        return ""
     
     

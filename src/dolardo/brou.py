@@ -60,15 +60,17 @@ class BROUHTMLParser(HTMLParser):
                     print "Conviritendo DATA"
                 value = data.strip().decode("utf-8", "ignore")
                 
-                #if DEBUG:
-                #    print "'%s'" % value
                 if DEBUG:
-                    print "Conviritendo DATA (listo)"                
+                    #print "'%s'" % value
+                    print value
+                if DEBUG:
+                    print "Conviritendo DATA (listo)"    
+                                
                 self.currency = value
                 self.current_value = None
             elif self.current_value == 'buy'.lower():
                 if DEBUG:
-                    print "'{0}'".format(data.strip())
+                    print data.strip()
                 
                 if data.strip() == '':
                     self.buy = Decimal(0)
@@ -77,7 +79,7 @@ class BROUHTMLParser(HTMLParser):
                 self.current_value = None
             elif self.current_value == 'sale'.lower():
                 if DEBUG:
-                    print "'{0}'".format(data.strip())
+                    print data.strip()
                 
                 self.sale = Decimal(data.strip())
                 self.current_value = None

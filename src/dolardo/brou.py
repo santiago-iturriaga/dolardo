@@ -81,11 +81,20 @@ class BROUHTMLParser(HTMLParser):
 
 def leer_cotizaciones():
     # Obtengo el html de cotizaciones
+    if DEBUG:
+        print "Leyendo html..."
+    
     html_handle = urllib.urlopen(url_brou)
     html = html_handle.read()
     html_handle.close()
 
+    if DEBUG:
+        print "Parseando html... (1)"
+    
     parser = BROUHTMLParser()
+    
+    if DEBUG:
+        print "Parseando html... (2)"
     parser.feed(html)
     
     return parser.cotizaciones

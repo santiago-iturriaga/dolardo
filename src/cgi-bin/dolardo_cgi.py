@@ -20,7 +20,7 @@ IMAGEN_BAJA = '../images/basic/down_64.png'
 IMAGEN_IGUAL = '../images/basic/left_64.png'
 DEBUG_HTML = "<div style='text-align:right; font-size:x-small; color: #777777;'>[ Modo DEBUG ]</div>" 
 
-current_path = os.getcwd()
+current_path = "/home/santiag0/www/dolardo.ituland.com/cgi-bin"
 sys.path.append(os.path.join(current_path, LIB_PATH))
 sys.path.insert(0, '/usr/local/lib/python2.4/site-packages/MySQL_python-1.2.3c1-py2.4-linux-i686.egg')
 sys.path.insert(0, '/usr/local/lib/python2.4/site-packages/setuptools-0.6c6-py2.4.egg')

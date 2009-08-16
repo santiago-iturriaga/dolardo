@@ -9,7 +9,7 @@ Created on Aug 15, 2009
 import os
 import sys
 
-current_path = os.getcwd()
+current_path = "/home/santiag0/proyectos/dolardo/src"
 sys.path.append(current_path)
 sys.path.insert(0, '/usr/local/lib/python2.4/site-packages/MySQL_python-1.2.3c1-py2.4-linux-i686.egg')
 sys.path.insert(0, '/usr/local/lib/python2.4/site-packages/setuptools-0.6c6-py2.4.egg')

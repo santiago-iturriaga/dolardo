@@ -23,12 +23,18 @@ def leer_cotizaciones():
             print "Iniciando..."
             
         cotizaciones = brou.leer_cotizaciones()
+
+        if DEBUG:
+            print "Cotizaciones leidas."
         
         if nombre_moneda in cotizaciones:
+            if DEBUG:
+                print "Obtengo cotizacion moneda..."
+                
             (buy, sell) = cotizaciones[nombre_moneda]
             
             if DEBUG:
-                print 'Cotización: %s / %s.' % (buy, sell)
+                print "Cotización: %s / %s." % (buy, sell)
             
             db_engine = create_engine(sql_connection)
             db_session = sessionmaker(bind=db_engine)

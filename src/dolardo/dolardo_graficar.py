@@ -14,6 +14,7 @@ from sqlalchemy.orm import sessionmaker
 from dolardo import brou, nombre_moneda, Base, DEBUG, sql_connection
 from dolardo.entities.cotizacion import Cotizacion
 from dolardo.entities.moneda import Moneda
+from dolardo import error_reporting
 
 from pygooglechart.pygooglechart import Chart
 from pygooglechart.pygooglechart import XYLineChart

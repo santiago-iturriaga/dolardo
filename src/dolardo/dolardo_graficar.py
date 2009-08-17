@@ -101,7 +101,7 @@ def generar_grafica(inicio, fin, cotizaciones):
     max_cotizaciones = max(max_cotizaciones_buy, max_cotizaciones_sell)    
     
     chart = XYLineChart(700, 400,
-                        x_range=(min(cotizaciones_fechas), max(cotizaciones_fechas)), 
+                        x_range=(min(cotizaciones_fechas-1), max(cotizaciones_fechas+1)), 
                         y_range=(0, int(max_cotizaciones)+5))
 
     x_axis = []

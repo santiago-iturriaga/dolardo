@@ -71,7 +71,7 @@ def graficar_cotizaciones():
     except:
         info = sys.exc_info()
         error_reporting.report_error(info)
-        
+        print info
         url = ""
     
     if len(rango_cotizaciones) >= 2:
@@ -123,6 +123,13 @@ def generar_grafica(inicio, fin, cotizaciones):
                 x_axis.append('')
         else:
             x_axis.append(cotizacion.fecha.strftime(formato_fecha_humano))
+    
+    if DEBUG:
+        print "x: %s" % x
+        print "y: %s" % y
+        print "x2: %s" % x2
+        print "y2: %s" % y2
+        print "x_axis: %s" % x_axis
     
     x_data_index = chart.add_data(x)
     y_data_index = chart.add_data(y)

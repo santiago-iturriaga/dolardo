@@ -1,16 +1,12 @@
 <html>
-<header><title>Dolardo</title></header>
-<body style="background-color: #777777;">
-	<div style="margin:auto; width:720px; 
-				border-left-style:solid; border-left-width:1px; 
-	 			border-right-style:solid; border-right-width:1px; 
-	 			background-color: white; height: 100%%;
-	 			padding-top: 5px;
-	 			padding-left: 10px;
-	 			padding-right: 10px;">
-	 		
+<header>
+	<title>Dolardo</title>
+	<link rel="stylesheet" href="../layout.css" />
+</header>
+<body>
+	<div class="wrapper">
 	 	<img src='../images/basic/diagram_64.png' style="float:left; margin-top: 10px;" />	
-		<h1 style="margin-left:70px; font-family: verdana, tahoma, arial;">Dolardo</h1>
+		<h1 class="title">Dolardo</h1>
 		<p>
 			Cotizaci&oacute;n del D&oacute;lar entre %s y %s seg&uacute;n el <a href='%s'>BROU</a>.
 		</p>
@@ -40,6 +36,9 @@
 			</table>
 		</div>
 		%s
+	</div>
+	<div class="footer>
+		<p>Copyright (c) 2008 iTULand</p>
 	</div>
 </body>
 </html>

@@ -20,15 +20,15 @@
 					<td>
 						<table>
 							<tr>
-								<td style="font-size: large;font-weight:bold;">Compra</td>
+								<td style="font-size: large;font-weight:bold;">Compra&nbsp;</td>
 								<td style="font-size: large;">$%s</td>
 							</tr>
 							<tr>
-								<td style="font-size: large;font-weight:bold;">Venta</td>
+								<td style="font-size: large;font-weight:bold;">Venta&nbsp;</td>
 								<td style="font-size: large;">$%s</td>
 							</tr>
 							<tr>
-								<td style="font-size: large;font-weight:bold;">Variaci&oacute;n</td>
+								<td style="font-size: large;font-weight:bold;">Variaci&oacute;n&nbsp;</td>
 								<td style="font-size: large;">$%s</td>
 							</tr>
 						</table>					

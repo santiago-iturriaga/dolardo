@@ -13,9 +13,9 @@
 		<div style="margin:auto; text-align:center; margin-top: 20px; margin-bottom: 20px;">
 			<img src='%s' />
 		</div>
-		<div style="margin-left: auto; margin-right: auto; margin-top: 15px;"> 
+		<div style="margin-left: auto; margin-right: auto; margin-top: 15px; text-align:center;"> 
 			<h2 style="margin-bottom: 0px; padding-bottom: 0px;">Cotizaci&oacute;n actual</h2>
-			<table>
+			<table style="text-align:center; margin: auto;">
 				<tr>
 					<td>
 						<table>

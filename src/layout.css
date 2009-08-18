@@ -5,6 +5,8 @@
 html, body {
 	height: 100%;
 	background-color: #777777;
+	/*margin:auto;*/
+	text-align: center;
 }
 
 .title {
@@ -18,24 +20,32 @@ html, body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	margin: 0 auto -4em;
-     
-	/*margin:auto;*/ 
+	margin: 0 auto 0px;
+      
+	width:720px; 
+	border-left-style:solid; 
+	border-left-width:1px; 
+	border-right-style:solid;
+	border-right-width:1px; 
+	background-color: white; 
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;    
+	text-align:left;
+}
+
+.footer, .push {
+	height: 120px;
+
+	margin:auto;
 	width:720px; 
 	border-left-style:solid; 
 	border-left-width:1px; 
 	border-right-style:solid; 
 	border-right-width:1px; 
-
 	background-color: white; 
-
 	padding-top: 5px;
 	padding-left: 10px;
-	padding-right: 10px;     
-}
-
-.footer, .push {
-	height: 4em;
-	margin: auto; 
-	width: 720px;
+	padding-right: 10px;
+	text-align:left;	
 }

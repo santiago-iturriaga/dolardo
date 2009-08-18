@@ -58,6 +58,7 @@ def main():
     else:
         imagen_cotizacion = IMAGEN_IGUAL
         
-    print template % (fecha_inicio, fecha_fin, url_brou, url_grafica, compra, venta, imagen_cotizacion, debug_html)
+    print template % (fecha_inicio, fecha_fin, url_brou, url_grafica, 
+                      compra, venta, delta, imagen_cotizacion, debug_html)
         
 main()

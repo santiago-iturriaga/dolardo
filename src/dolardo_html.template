@@ -38,7 +38,7 @@
 		%s
 	</div>
 	<div class="footer>
-		<p>Copyright (c) 2008 iTULand</p>
+		<p style="font-size: x-small; text-align:right;">Copyright (c) 2008 iTULand</p>
 	</div>
 </body>
 </html>

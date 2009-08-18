@@ -22,7 +22,7 @@ html, body {
 	height: 100%;
 	margin: 0 auto 0px;
       
-	width:720px; 
+	width:725px; 
 	border-left-style:solid; 
 	border-left-width:1px; 
 	border-right-style:solid;
@@ -35,10 +35,10 @@ html, body {
 }
 
 .footer, .push {
-	height: 120px;
+	height: 80px;
 
 	margin:auto;
-	width:720px; 
+	width:725px; 
 	border-left-style:solid; 
 	border-left-width:1px; 
 	border-right-style:solid; 

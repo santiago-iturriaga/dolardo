@@ -29,7 +29,7 @@
 							</tr>
 							<tr>
 								<td style="font-size: large;font-weight:bold;">Variaci&oacute;n</td>
-								<td style="font-size: large;">%s</td>
+								<td style="font-size: large;">$%s</td>
 							</tr>
 						</table>					
 					</td>

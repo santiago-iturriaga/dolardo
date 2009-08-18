@@ -7,13 +7,13 @@
 	<div class="wrapper">
 	 	<img src='../images/basic/diagram_64.png' style="float:left; margin-top: 10px;" />	
 		<h1 class="title">Dolardo</h1>
-		<p>
+		<p style="margin-top: 20px; margin-bottom: 10px;">
 			Cotizaci&oacute;n del D&oacute;lar entre %s y %s seg&uacute;n el <a href='%s'>BROU</a>.
 		</p>
-		<div style="margin:auto; text-align:center;">
+		<div style="margin:auto; text-align:center; margin-top: 20px; margin-bottom: 20px;">
 			<img src='%s' />
 		</div>
-		<div style="margin-left: auto; margin-right: 50px; float:right; ">
+		<div style="margin-left: auto; margin-right: 50px; margin-top: 15px; float:right; ">
 			<h2 style="margin-bottom: 0px; padding-bottom: 0px;">Cotizaci&oacute;n actual</h2>
 			<table>
 				<tr>
@@ -37,8 +37,10 @@
 		</div>
 		%s
 	</div>
-	<div class="footer>
-		<p style="font-size: x-small; text-align:right;">Copyright (c) 2008 iTULand</p>
+	<div class="footer">
+		<img src="../images/python-powered-w-70x28.png" style="margin:auto;" />
+		<p style="text-align:right;font-size:x-small;">C&oacute;digo fuente en <a href="http://code.google.com/p/dolardo/">http://code.google.com/p/dolardo/</a></p>
+		<p style="text-align:right;font-size:x-small;">Copyright (c) 2008 iTULand</p>
 	</div>
 </body>
 </html>

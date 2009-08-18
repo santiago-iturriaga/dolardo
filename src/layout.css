@@ -8,6 +8,8 @@ html, body {
 }
 
 .title {
+	margin-bottom: 10px;
+	margin-top:25px;
 	margin-left:70px; 
 	font-family: verdana, tahoma, arial;
 }

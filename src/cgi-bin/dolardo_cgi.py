@@ -14,7 +14,7 @@ cgitb.enable()
 
 LIB_PATH = ".."
 BASE_PATH = "../dolardo"
-TEMPLATE_FILE = '../dolardo_html.template'
+TEMPLATE_FILE = '../dolardo_template.html'
 IMAGEN_SUBE = '../images/basic/up_64.png'
 IMAGEN_BAJA = '../images/basic/down_64.png'
 IMAGEN_IGUAL = '../images/basic/left_64.png'

@@ -20,8 +20,8 @@ html, body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	margin: 0 auto -120px;
-    padding-bottom: 120px;
+	margin: 0 auto -20px;
+	padding-bottom: 20px;
       
 	width:725px; 
 	border-left-style:solid; 

@@ -104,6 +104,10 @@ def generar_grafica(inicio, fin, cotizaciones):
     min_cotizaciones_sell = min(cotizaciones_sell)
     min_cotizaciones = min(min_cotizaciones_buy, min_cotizaciones_sell)
  
+    if DEBUG:
+        print int(min_cotizaciones)-1
+        print int(max_cotizaciones)+1
+
     chart = XYLineChart(700, 400,
                         x_range=(min(cotizaciones_fechas), max(cotizaciones_fechas)), 
                         y_range=(int(min_cotizaciones)-1, int(max_cotizaciones)+1))
@@ -142,10 +146,13 @@ def generar_grafica(inicio, fin, cotizaciones):
 
     # Y axis labels
     #print int((max_cotizaciones-min_cotizaciones+4)/4)
-    left_axis = range(int(min_cotizaciones)-1, int(max_cotizaciones)+1, int((max_cotizaciones-min_cotizaciones+2)/2))
+    #left_axis = range(int(min_cotizaciones)-1, int(max_cotizaciones)+1, int((max_cotizaciones-min_cotizaciones+2)/2))
+    left_axis = range(int(min_cotizaciones)-1, int(max_cotizaciones)+1+1, 1)
     left_axis[0] = ''
     left_axis_index = chart.set_axis_labels(Axis.LEFT, left_axis)
     
+    #chart.set_axis_labels(Axis.LEFT, range(21,25))
+
     # X axis labels
     bottom_axis_index = chart.set_axis_labels(Axis.BOTTOM, x_axis)
     

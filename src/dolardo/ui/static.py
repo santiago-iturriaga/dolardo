@@ -9,3 +9,7 @@ from bottle.bottle import route, send_file
 @route('/images/:filename')
 def static_images(filename):
     send_file(filename, root='images')
+    
+@route('/css/:filename')
+def static_css(filename):
+    send_file(filename, root='.')

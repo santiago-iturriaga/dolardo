@@ -1,17 +1,60 @@
 <html>
-	<head>
-		<meta http-equiv="refresh" content="0;url=cgi-bin/dolardo.cgi">
-	</head>
-	<body>
-		<script type="text/javascript">
-			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-			document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-		</script>
-		<script type="text/javascript">
-			try {
-				var pageTracker = _gat._getTracker("UA-1936647-8");
-				pageTracker._trackPageview();
-			} catch(err) {}
-		</script>
-	</body>
+<header>
+	<title>Dolardo</title>
+	<link rel="stylesheet" href="layout.css" />
+</header>
+<body>
+	<div class="wrapper">
+	 	<img src='../images/basic/diagram_64.png' style="float:left; margin-top: 10px;" />	
+		<h1 class="title"><a href="http://en.wikipedia.org/wiki/Dolardo" style="color: black; text-decoration: none;">Dolardo</a></h1>
+		<p style="margin-top: 20px; margin-bottom: 10px;">
+			Cotizaci&oacute;n del D&oacute;lar entre {{fecha_inicio}} y {{fecha_fin}} seg&uacute;n el <a href='{{url_brou}}'>BROU</a>.
+		</p>
+		<div style="margin:auto; text-align:center; margin-top: 20px; margin-bottom: 20px;">
+			<img src='{{grafico}}' />
+		</div>
+		<div style="margin-left: auto; margin-right: auto; margin-top: 15px; text-align:center;"> 
+			<h2 style="margin-bottom: 0px; padding-bottom: 0px;">Cotizaci&oacute;n actual</h2>
+			<table style="text-align:center; margin: auto;">
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<td style="font-size: large;font-weight:bold;">Compra&nbsp;</td>
+								<td style="font-size: large;">${{compra}}</td>
+							</tr>
+							<tr>
+								<td style="font-size: large;font-weight:bold;">Venta&nbsp;</td>
+								<td style="font-size: large;">${{venta}}</td>
+							</tr>
+							<tr>
+								<td style="font-size: large;font-weight:bold;">Variaci&oacute;n&nbsp;</td>
+								<td style="font-size: large;">${{variacion}}</td>
+							</tr>
+						</table>					
+					</td>
+					<td>
+						<img src='{{img_variacion}}' />
+					</td>
+				<tr>
+			</table>
+		</div>
+		{{debug}}
+	</div>
+	<div class="footer">
+		<p style="text-align:center; margin:auto;"><a href="http://www.python.org"><img src="../images/python-powered-w-70x28.png" border="0" /></a></p>
+		<p style="text-align:right;font-size:x-small;">C&oacute;digo fuente en <a href="http://code.google.com/p/dolardo/">http://code.google.com/p/dolardo/</a></p>
+		<p style="text-align:right;font-size:x-small;">Copyright (c) 2009 <a href="http://ituland.com">iTULand</a></p>
+	</div>
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-1936647-8");
+			pageTracker._trackPageview();
+		} catch(err) {}
+	</script>
+</body>
 </html>

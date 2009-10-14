@@ -20,9 +20,9 @@ from pygooglechart.pygooglechart import Chart
 from pygooglechart.pygooglechart import XYLineChart
 from pygooglechart.pygooglechart import Axis
 
-def graficar_cotizaciones():
+def graficar_cotizaciones(dias, height, width):
     # Represento 30 días en la gráfica. 
-    rango = timedelta(30)
+    rango = timedelta(dias)
     
     fin_rango = datetime.now()
     inicio_rango = fin_rango - rango
@@ -67,7 +67,7 @@ def graficar_cotizaciones():
         raise
     
     try:
-        url = generar_grafica(inicio_rango, fin_rango, rango_cotizaciones)
+        url = generar_grafica(inicio_rango, fin_rango, rango_cotizaciones, height, width)
     except:
         info = sys.exc_info()
         error_reporting.report_error(info)
@@ -83,7 +83,7 @@ def graficar_cotizaciones():
             url, 
             rango_cotizaciones[-1].compra, rango_cotizaciones[-1].venta, delta)
         
-def generar_grafica(inicio, fin, cotizaciones):
+def generar_grafica(inicio, fin, cotizaciones, height, width):
     formato_fecha_humano = "%d/%m/%Y"
     formato_fecha_axis = "%y%m%d"
     
@@ -108,7 +108,7 @@ def generar_grafica(inicio, fin, cotizaciones):
         print int(min_cotizaciones)-1
         print int(max_cotizaciones)+1
 
-    chart = XYLineChart(700, 400,
+    chart = XYLineChart(height, width,
                         x_range=(min(cotizaciones_fechas), max(cotizaciones_fechas)), 
                         y_range=(int(min_cotizaciones)-1, int(max_cotizaciones)+1))
 
@@ -134,10 +134,20 @@ def generar_grafica(inicio, fin, cotizaciones):
     
     if DEBUG:
         print "x: %s" % x
+        for item_x in x:
+            print item_x
         print "y: %s" % y
+        for item_y in y:
+            print item_y
         print "x2: %s" % x2
+        for item_x2 in x2:
+            print item_x2
         print "y2: %s" % y2
+        for item_y2 in y2:
+            print item_y2
         print "x_axis: %s" % x_axis
+        for item_x_ax in x_axis:
+            print item_x_ax 
     
     x_data_index = chart.add_data(x)
     y_data_index = chart.add_data(y)

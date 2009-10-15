@@ -1,0 +1,3 @@
+AddHandler cgi-script .cgi
+AddHandler wsgi-script .wsgi
+AddHandler fcgid-script .fcgi

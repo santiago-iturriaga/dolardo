@@ -7,12 +7,12 @@ Created on Aug 15, 2009
 
 DEBUG = False
 
-#sql_connection = "mysql://santiag0_santiag:santiag0@localhost/santiag0_dolardo"
-sql_connection = "mysql://santiago@localhost/dolardo"
+sql_connection = "mysql://santiag0_santiag:santiag0@localhost/santiag0_dolardo"
+#sql_connection = "mysql://santiago@localhost/dolardo"
 #sql_connection = "sqlite:///cotizaciones.db"
 
-url_brou = "dolardo/brou-cotizaciones.html"
-#url_brou = "http://www.portal.brou.com.uy/web/guest/institucional/cotizaciones"
+#url_brou = "dolardo/brou-cotizaciones.html"
+url_brou = "http://www.portal.brou.com.uy/web/guest/institucional/cotizaciones"
 nombre_moneda = u'Dólar'
 
 log_file = 'dolardo.log'

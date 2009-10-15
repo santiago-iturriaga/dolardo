@@ -6,10 +6,11 @@ Created on Aug 15, 2009
 '''
 
 import sys
-from datetime import datetime
+from datetime import datetime, date
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine
+from sqlalchemy.sql.expression import cast
+from sqlalchemy import create_engine, Date
 from sqlalchemy.orm import sessionmaker
 
 from dolardo import DEBUG, nombre_moneda, brou, Base, sql_connection
@@ -36,7 +37,7 @@ def leer_cotizaciones():
             db_engine = create_engine(sql_connection)
             db_session = sessionmaker(bind=db_engine)
 
-            Base.metadata.create_all(db_engine)        
+            Base.metadata.create_all(db_engine)
             
             session = db_session()
             try:
@@ -47,11 +48,28 @@ def leer_cotizaciones():
                     session.add(moneda)
                 else:
                     moneda = monedas[0]
-                    
-                cotizacion = Cotizacion(datetime.now(), buy, sell)
-                cotizacion.moneda = moneda
-                session.add(cotizacion)
                 
+                resultado = session.query(Cotizacion).filter(cast(Cotizacion.fecha, Date) == date.today()).all()
+                
+                if not resultado:
+                    if DEBUG:
+                        print "No hay cotizacion del dia, creo una nueva cotización."
+                    cotizacion = Cotizacion(datetime.now(), buy, sell)
+                    cotizacion.moneda = moneda
+                    session.add(cotizacion)
+                else:
+                    cotizacion = resultado[0]
+                    if cotizacion.compra != buy or cotizacion.venta != sell:
+                        if DEBUG:
+                            print "Se encontró la cotización, cambió la cotizacion del dia."
+                        cotizacion.compra = buy
+                        cotizacion.venta = sell
+                        cotizacion.fecha = datetime.now()
+                        session.add(cotizacion)                    
+                    else:
+                        if DEBUG:
+                            print "Se encontró la cotización, pero no cambió la cotizacion del dia."
+                            
                 session.commit()
                 #error_reporting.report("Lectura de cotizacion: OK!.")
             except:

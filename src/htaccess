@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^cgi-bin - [L]
+
+RewriteCond %{REQUEST_URI} !(cgi-bin/dolardo.wsgi)
+RewriteRule ^(.*)$ cgi-bin/dolardo.wsgi/$1 [L]

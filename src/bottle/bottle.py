@@ -75,7 +75,10 @@ import re
 import random
 import threading
 import time
+
+#comentado para que funcione en hostgator python 2.4
 #import email.utils
+
 from wsgiref.headers import Headers as HeaderWrapper
 from Cookie import SimpleCookie
 import anydbm as dbm
@@ -500,6 +503,7 @@ def parse_date(ims):
     Understands rfc1123, rfc850 and asctime.
     """
     try:
+        #comentado para que funcione en hostgator python 2.4
         #ts = email.utils.parsedate_tz(ims)
         if ts is not None:
             if ts[9] is None:

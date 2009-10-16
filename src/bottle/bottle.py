@@ -75,7 +75,7 @@ import re
 import random
 import threading
 import time
-import email.utils
+#import email.utils
 from wsgiref.headers import Headers as HeaderWrapper
 from Cookie import SimpleCookie
 import anydbm as dbm
@@ -500,7 +500,7 @@ def parse_date(ims):
     Understands rfc1123, rfc850 and asctime.
     """
     try:
-        ts = email.utils.parsedate_tz(ims)
+        #ts = email.utils.parsedate_tz(ims)
         if ts is not None:
             if ts[9] is None:
                 return time.mktime(ts[:8] + (0,)) - time.timezone

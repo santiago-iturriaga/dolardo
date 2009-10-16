@@ -17,16 +17,6 @@ os.chdir('/home/santiag0/www/dolardo.ituland.com')
 
 from dolardo import error_reporting
 
-#try:
-#	import bottle
-#	import dolardo.ui.index
-#	import dolardo.ui.static
-#
-#	application = bottle.bottle.default_app()
-#except:
-#	(type, value, traceback) = sys.exc_info()
-#	error_reporting.write_log("Type: %s\nValue: %s\nTraceback %s\n" % (type, value, traceback))
-
 import bottle
 import dolardo.ui.index
 import dolardo.ui.static
@@ -34,12 +24,3 @@ import dolardo.ui.static
 if __name__ == '__main__':
     from flup.server.fcgi import WSGIServer
     WSGIServer(bottle.bottle.default_app()).run()
-
-#def myapp(environ, start_response):
-#    start_response('200 OK', [('Content-Type', 'text/plain')])
-#    return ['Hello World!\n']
-
-#if __name__ == '__main__':
-#    from flup.server.fcgi import WSGIServer
-#    WSGIServer(myapp).run()
-

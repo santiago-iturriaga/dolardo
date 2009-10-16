@@ -54,32 +54,53 @@ def custom(height, width, dias):
     except:
         int_width = default_width
         
-    cotizaciones = dolardo_graficar.graficar_cotizaciones(int_dias, int_height, int_width)
-    
-    if DEBUG:
-        print cotizaciones
-
-    (fecha_inicio, fecha_fin, url_grafica, compra, venta, delta) = cotizaciones
-           
-    if DEBUG:
-        debug_html = DEBUG_HTML
-    else:
-        debug_html = ""
+    try:  
+        cotizaciones = dolardo_graficar.graficar_cotizaciones(int_dias, int_height, int_width)
         
-    if delta > 0:
-        imagen_cotizacion = IMAGEN_SUBE
-    elif delta < 0:
-        imagen_cotizacion = IMAGEN_BAJA
-    else:
-        imagen_cotizacion = IMAGEN_IGUAL
+        if DEBUG:
+            print cotizaciones
     
-    return template('index.html', 
-                    url_brou=url_brou,
-                    fecha_inicio=fecha_inicio,
-                    fecha_fin=fecha_fin,
-                    grafico=url_grafica,
-                    compra=compra,
-                    venta=venta,
-                    variacion=delta,
-                    img_variacion=imagen_cotizacion,
-                    debug=debug_html)
+        (rango_cotizaciones, url_grafica) = cotizaciones
+               
+        # Primer y ultima fecha de la lista de cotizaciones.
+        fecha_inicio = rango_cotizaciones[0].fecha
+        fecha_fin = rango_cotizaciones[-1].fecha
+         
+        # Ultima cotizacion de compra/venta.
+        compra = rango_cotizaciones[-1].compra
+        venta = rango_cotizaciones[-1].venta
+        
+        # Variacion entre la ultima y penultima cotizacion.        
+        if len(rango_cotizaciones) >= 2:
+            delta = rango_cotizaciones[-1].compra - rango_cotizaciones[-2].compra
+        else:
+            delta = 0
+               
+        if DEBUG:
+            debug_html = DEBUG_HTML
+        else:
+            debug_html = ""
+            
+        if delta > 0:
+            imagen_cotizacion = IMAGEN_SUBE
+        elif delta < 0:
+            imagen_cotizacion = IMAGEN_BAJA
+        else:
+            imagen_cotizacion = IMAGEN_IGUAL
+        
+        if len(url_grafica) == 0:
+            url_grafica = "/images/out-of-order.jpg"
+        
+        return template('index.html', 
+                        url_brou=url_brou,
+                        fecha_inicio=fecha_inicio.strftime("%d/%m/%Y"),
+                        fecha_fin=fecha_fin.strftime("%d/%m/%Y"),
+                        grafico=url_grafica,
+                        compra=compra,
+                        venta=venta,
+                        variacion=delta,
+                        img_variacion=imagen_cotizacion,
+                        debug=debug_html)
+    except:
+        redirect("/error")
+        

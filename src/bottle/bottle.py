@@ -78,6 +78,7 @@ import time
 
 #comentado para que funcione en hostgator python 2.4
 #import email.utils
+from email.utils import parsedate_tz 
 
 from wsgiref.headers import Headers as HeaderWrapper
 from Cookie import SimpleCookie
@@ -505,6 +506,7 @@ def parse_date(ims):
     try:
         #comentado para que funcione en hostgator python 2.4
         #ts = email.utils.parsedate_tz(ims)
+        ts = parsedate_tz(ims)
         if ts is not None:
             if ts[9] is None:
                 return time.mktime(ts[:8] + (0,)) - time.timezone

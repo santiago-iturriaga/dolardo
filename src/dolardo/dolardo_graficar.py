@@ -61,9 +61,8 @@ def graficar_cotizaciones(dias, height, width):
         info = sys.exc_info()
         error_reporting.report_error(info)
         print info
-        
+
         session.rollback()
-        
         raise
     
     try:
@@ -72,16 +71,10 @@ def graficar_cotizaciones(dias, height, width):
         info = sys.exc_info()
         error_reporting.report_error(info)
         print info
-        url = ""
-    
-    if len(rango_cotizaciones) >= 2:
-        delta = rango_cotizaciones[-1].compra - rango_cotizaciones[-2].compra
-    else:
-        delta = 0
         
-    return (rango_cotizaciones[0].fecha.strftime("%d/%m/%Y"), rango_cotizaciones[-1].fecha.strftime("%d/%m/%Y"), 
-            url, 
-            rango_cotizaciones[-1].compra, rango_cotizaciones[-1].venta, delta)
+        url = ""
+           
+    return (rango_cotizaciones, url)
         
 def generar_grafica(inicio, fin, cotizaciones, height, width):
     formato_fecha_humano = "%d/%m/%Y"

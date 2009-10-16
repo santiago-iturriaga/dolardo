@@ -20,6 +20,7 @@ from dolardo import error_reporting
 import bottle
 import dolardo.ui.index
 import dolardo.ui.static
+import dolardo.ui.error
 
 if __name__ == '__main__':
     from flup.server.fcgi import WSGIServer

@@ -1,3 +1,4 @@
+#encoding: utf-8
 '''
 Created on Oct 13, 2009
 
@@ -36,6 +37,7 @@ def custom(dias):
 
 @route('/custom/:height/:width/:dias')
 def custom(height, width, dias):
+    # Obtengo los parametros de visualización.
     int_dias = 0
     try:
         int_dias = int(dias)
@@ -55,6 +57,7 @@ def custom(height, width, dias):
         int_width = default_width
         
     try:  
+        # Generación de la gráfica.
         cotizaciones = dolardo_graficar.graficar_cotizaciones(int_dias, int_height, int_width)
         
         if DEBUG:
@@ -73,14 +76,11 @@ def custom(height, width, dias):
         # Variacion entre la ultima y penultima cotizacion.        
         if len(rango_cotizaciones) >= 2:
             delta = rango_cotizaciones[-1].compra - rango_cotizaciones[-2].compra
+            delta_total = rango_cotizaciones[-1].compra - rango_cotizaciones[0].compra
         else:
             delta = 0
-               
-        if DEBUG:
-            debug_html = DEBUG_HTML
-        else:
-            debug_html = ""
-            
+            delta_total = 0
+                          
         if delta > 0:
             imagen_cotizacion = IMAGEN_SUBE
         elif delta < 0:
@@ -88,18 +88,30 @@ def custom(height, width, dias):
         else:
             imagen_cotizacion = IMAGEN_IGUAL
         
+        # Si no hay url de imagen muestro una imagen de error.
         if len(url_grafica) == 0:
             url_grafica = "/images/out-of-order.jpg"
         
+        if DEBUG:
+            debug_html = DEBUG_HTML
+        else:
+            debug_html = ""
+        
+        # Genero el template HTML.
         return template('index.html', 
+                        
                         url_brou=url_brou,
                         fecha_inicio=fecha_inicio.strftime("%d/%m/%Y"),
                         fecha_fin=fecha_fin.strftime("%d/%m/%Y"),
                         grafico=url_grafica,
+                        
+                        fecha=fecha_fin.strftime("%d/%m/%Y %H:%M"),
                         compra=compra,
                         venta=venta,
                         variacion=delta,
+                        variacion_total=delta_total,
                         img_variacion=imagen_cotizacion,
+                        
                         debug=debug_html)
     except:
         redirect("/error")

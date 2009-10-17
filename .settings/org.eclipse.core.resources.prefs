@@ -1,9 +1,10 @@
-#Fri Oct 16 19:57:16 UYST 2009
+#Fri Oct 16 22:02:42 UYST 2009
 eclipse.preferences.version=1
 encoding//src/bottle/bottle.py=utf-8
 encoding//src/dolardo/__init__.py=utf-8
 encoding//src/dolardo/brou.py=utf-8
 encoding//src/dolardo/dolardo_graficar.py=utf-8
 encoding//src/dolardo/dolardo_leer.py=utf-8
+encoding//src/dolardo/ui/index.py=utf-8
 encoding//src/dolardo_run.py=utf-8
 encoding//src/tests/test_db.py=utf-8

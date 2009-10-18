@@ -19,7 +19,7 @@ class Cotizacion(Base):
     moneda_id = Column(Integer, ForeignKey(Moneda.moneda_id), nullable=False)
     moneda = relation(Moneda)
     
-    fecha = Column(DateTime, nullable=False, unique=True)
+    fecha = Column(DateTime, nullable=False)
     compra = Column(Numeric, nullable=True)
     venta = Column(Numeric, nullable=False)
 

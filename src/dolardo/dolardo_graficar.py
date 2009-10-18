@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from dolardo import brou, nombre_moneda, Base, DEBUG, sql_connection
+from dolardo import brou, show_moneda, Base, DEBUG, sql_connection
 from dolardo.entities.cotizacion import Cotizacion
 from dolardo.entities.moneda import Moneda
 from dolardo import error_reporting
@@ -39,9 +39,9 @@ def graficar_cotizaciones(dias, height, width):
             print "Inicio: %s" % inicio_rango
             print "Fin: %s" % fin_rango
         
-        moneda = session.query(Moneda).filter(Moneda.nombre == nombre_moneda).one()
+        moneda = session.query(Moneda).filter(Moneda.nombre == show_moneda).one()
         if not moneda:
-            raise Exception('Error, no se encontró la moneda {0}.'.format(nombre_moneda))
+            raise Exception('Error, no se encontró la moneda {0}.'.format(show_moneda))
         
         #if DEBUG:
         #    print "Moneda: %s (%s)" % (moneda.nombre, moneda.moneda_id)

@@ -13,7 +13,7 @@ from sqlalchemy.sql.expression import cast
 from sqlalchemy import create_engine, Date
 from sqlalchemy.orm import sessionmaker
 
-from dolardo import DEBUG, nombre_moneda, brou, Base, sql_connection
+from dolardo import DEBUG, parse_moneda_list, brou, Base, sql_connection
 from dolardo.entities.cotizacion import Cotizacion
 from dolardo.entities.moneda import Moneda
 from dolardo import error_reporting
@@ -27,56 +27,66 @@ def leer_cotizaciones():
 
         if DEBUG:
             print "Cotizaciones leidas."
-        
-        if nombre_moneda in cotizaciones:
-            (buy, sell) = cotizaciones[nombre_moneda]
-            
-            if DEBUG:
-                print "Cotización: %s / %s." % (buy, sell)
-            
-            db_engine = create_engine(sql_connection)
-            db_session = sessionmaker(bind=db_engine)
 
-            Base.metadata.create_all(db_engine)
-            
+        db_engine = create_engine(sql_connection)
+        db_session = sessionmaker(bind=db_engine)
+        Base.metadata.create_all(db_engine)
+
+        for nombre_moneda in parse_moneda_list:
             session = db_session()
-            try:
-                monedas = session.query(Moneda).filter(Moneda.nombre == nombre_moneda).all()
 
-                if not monedas:
-                    moneda = Moneda(nombre_moneda)
-                    session.add(moneda)
-                else:
-                    moneda = monedas[0]
-                
-                resultado = session.query(Cotizacion).filter(cast(Cotizacion.fecha, Date) == date.today()).all()
-                
-                if not resultado:
+            try:
+                if nombre_moneda in cotizaciones:
+                    (buy, sell) = cotizaciones[nombre_moneda]
+                    
                     if DEBUG:
-                        print "No hay cotizacion del dia, creo una nueva cotización."
-                    cotizacion = Cotizacion(datetime.now(), buy, sell)
-                    cotizacion.moneda = moneda
-                    session.add(cotizacion)
-                else:
-                    cotizacion = resultado[0]
-                    if cotizacion.compra != buy or cotizacion.venta != sell:
-                        if DEBUG:
-                            print "Se encontró la cotización, cambió la cotizacion del dia."
-                        cotizacion.compra = buy
-                        cotizacion.venta = sell
-                        cotizacion.fecha = datetime.now()
-                        session.add(cotizacion)                    
-                    else:
-                        if DEBUG:
-                            print "Se encontró la cotización, pero no cambió la cotizacion del dia."
+                        print "Cotización %s: %s / %s." % (nombre_moneda, buy, sell)               
+    
+                    try:
+                        monedas = session.query(Moneda).filter(Moneda.nombre == nombre_moneda).all()
+        
+                        if not monedas:
+                            if DEBUG:
+                                print "No hay moneda para la cotizacion de %s, creo la moneda y la cotización." % nombre_moneda
                             
+                            moneda = Moneda(nombre_moneda)
+                            session.add(moneda)
+                            
+                            cotizacion = Cotizacion(datetime.now(), buy, sell)
+                            cotizacion.moneda = moneda
+                            session.add(cotizacion)
+                        else:
+                            moneda = monedas[0]
+                        
+                            resultado = session.query(Cotizacion).filter(cast(Cotizacion.fecha, Date) == date.today()).filter(Cotizacion.moneda_id == moneda.moneda_id).all()
+                            
+                            if not resultado:
+                                if DEBUG:
+                                    print "No hay cotizacion del dia de %s, creo una nueva cotización." % nombre_moneda
+                                cotizacion = Cotizacion(datetime.now(), buy, sell)
+                                cotizacion.moneda = moneda
+                                session.add(cotizacion)
+                            else:
+                                cotizacion = resultado[0]
+                                if cotizacion.compra != buy or cotizacion.venta != sell:
+                                    if DEBUG:
+                                        print "Se encontró la cotización de %s, cambió la cotizacion del dia." % nombre_moneda
+                                    cotizacion.compra = buy
+                                    cotizacion.venta = sell
+                                    cotizacion.fecha = datetime.now()
+                                    session.add(cotizacion)                    
+                                else:
+                                    if DEBUG:
+                                        print "Se encontró la cotización de %s, pero no cambió la cotizacion del dia." % nombre_moneda
+                    except:
+                        raise
+                else:
+                    error_reporting.report("Error leyendo la cotización de la moneda %s." % nombre_moneda)
+        
                 session.commit()
-                #error_reporting.report("Lectura de cotizacion: OK!.")
             except:
                 session.rollback()
-                raise
-        else:
-            error_reporting.report("Error leyendo la cotización.")
+                raise                
     except:
         info = sys.exc_info()
         error_reporting.report_error(info)

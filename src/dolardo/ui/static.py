@@ -15,9 +15,10 @@ def static_css(filename):
     send_file(filename, root='.')
     
 @route('/sitemap.xml')
-def static_css(filename):
+def sitemap():
     send_file('sitemap.xml', root='.')
     
 @route('/robots.txt')
-def static_css(filename):
+def robots():
     send_file('robots.txt', root='.')
+

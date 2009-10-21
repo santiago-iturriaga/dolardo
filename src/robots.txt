@@ -1,3 +1,2 @@
 User-agent: *
 Allow: /
-Sitemap: http://dolardo.ituland.com/sitemap.xml

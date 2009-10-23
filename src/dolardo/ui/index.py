@@ -10,7 +10,7 @@ from bottle.bottle import route, template, redirect
 IMAGEN_SUBE = '/images/up_64.png'
 IMAGEN_BAJA = '/images/down_64.png'
 IMAGEN_IGUAL = '/images/left_64.png'
-DEBUG_HTML = "<div style='text-align:right; font-size:x-small; color: #777777;'>[ Modo DEBUG ]</div>" 
+DEBUG_HTML = '<div style="text-align:right; font-size:x-small; color: #777777;">[ Modo DEBUG ]</div>' 
 
 from dolardo import url_brou, DEBUG
 from dolardo import dolardo_graficar
@@ -21,7 +21,7 @@ default_width = 400
 
 @route('/')
 def index():
-    redirect("/default")
+    redirect('/default')
 
 @route('/default')
 def default():
@@ -37,6 +37,10 @@ def custom(dias):
 
 @route('/custom/:height/:width/:dias')
 def custom(height, width, dias):
+    selected30 = ''
+    selected60 = ''
+    selected120 = ''
+    
     # Obtengo los parametros de visualización.
     int_dias = 0
     try:
@@ -55,6 +59,13 @@ def custom(height, width, dias):
         int_width = int(width)
     except:
         int_width = default_width
+
+    if int_dias == 30:
+        selected30 = 'selected'
+    elif int_dias == 60:
+        selected60 = 'selected'
+    elif int_dias == 120:
+        selected120 = 'selected'
         
     try:  
         # Generación de la gráfica.
@@ -90,7 +101,7 @@ def custom(height, width, dias):
         
         # Si no hay url de imagen muestro una imagen de error.
         if len(url_grafica) == 0:
-            url_grafica = "/images/out-of-order.jpg"
+            url_grafica = '/images/out-of-order.jpg'
         
         if DEBUG:
             debug_html = DEBUG_HTML
@@ -101,18 +112,21 @@ def custom(height, width, dias):
         return template('index.html', 
                         
                         url_brou=url_brou,
-                        fecha_inicio=fecha_inicio.strftime("%d/%m/%Y"),
-                        fecha_fin=fecha_fin.strftime("%d/%m/%Y"),
+                        fecha_inicio=fecha_inicio.strftime('%d/%m/%Y'),
+                        fecha_fin=fecha_fin.strftime('%d/%m/%Y'),
                         grafico=url_grafica,
                         
-                        fecha=fecha_fin.strftime("%d/%m/%Y %H:%M"),
+                        fecha=fecha_fin.strftime('%d/%m/%Y %H:%M'),
                         compra=compra,
                         venta=venta,
                         variacion=delta,
                         variacion_total=delta_total,
                         img_variacion=imagen_cotizacion,
                         
+                        selected30=selected30,
+                        selected60=selected60,
+                        selected120=selected120,
                         debug=debug_html)
     except:
-        redirect("/error")
+        redirect('/error')
         

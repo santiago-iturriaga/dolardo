@@ -12,11 +12,19 @@ def static_images(filename):
     
 @route('/css/:filename')
 def static_css(filename):
-    send_file(filename, root='.')
+    send_file(filename, root='css')
+
+@route('/js/:filename')
+def static_css(filename):
+    send_file(filename, root='js')
     
 @route('/sitemap.xml')
 def sitemap():
     send_file('sitemap.xml', root='.')
+
+@route('/sitemap.xsl')
+def sitemap():
+    send_file('sitemap.xsl', root='.')
     
 @route('/robots.txt')
 def robots():

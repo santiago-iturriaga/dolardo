@@ -1,81 +1,60 @@
-<html>
-<head>
-	<meta name="google-site-verification" content="dxavtmRlIWA8ZNIBh1H8DNrhGSVIEQ_5r9PmM70HiUg" />
-	<title>Dolardo</title>
-	<link rel="stylesheet" href="/css/layout.css" />
-</head>
-<body>
-	<div class="wrapper">
-	 	<img src='/images/diagram_64.png' style="float:left; margin-top: 10px;" />	
-		<h1 class="title"><a href="http://en.wikipedia.org/wiki/Dolardo" style="color: black; text-decoration: none;">Dolardo</a></h1>
-		<p style="margin-top: 20px; margin-bottom: 10px;">
-			Cotizaci&oacute;n del D&oacute;lar entre {{fecha_inicio}} y {{fecha_fin}} seg&uacute;n el <a href='{{url_brou}}'>BROU</a>.
-		</p>
-		<div style="margin:auto; text-align:center; margin-top: 20px; margin-bottom: 20px;">
-			<div style="text-align:right; font-size:0.7em;">
-				<a style="text-decoration: none;" href="/custom/30">[ 30 d&iacute;as ]</a>&nbsp;<a style="text-decoration: none;" href="/custom/60">[ 60 d&iacute;as ]</a>&nbsp;<a style="text-decoration: none;" href="/custom/120">[ 120 d&iacute;as ]</a>
-			</div>
-			<img src='{{grafico}}' />
-		</div>
-		<div style="margin-left: auto; margin-right: auto; margin-top: 15px; text-align:center;"> 
-			<h2 style="margin-bottom: 0px; padding-bottom: 0px;">Cotizaci&oacute;n actual</h2>
-			{{fecha}}
-			<table style="text-align:center; margin: auto;">
-				<tr>
-					<td>
-						<table>
-							<tr>
-								<td style="font-size: large;font-weight:bold;">Compra&nbsp;</td>
-								<td style="font-size: large;">${{compra}}</td>
-							</tr>
-							<tr>
-								<td style="font-size: large;font-weight:bold;">Venta&nbsp;</td>
-								<td style="font-size: large;">${{venta}}</td>
-							</tr>
-							<tr>
-								
-							</tr>
-						</table>					
-					</td>
-					<td>
-						<img src='{{img_variacion}}' />
-					</td>
-				<tr>
-			</table>
-			<table style="text-align:center; margin: auto;">
-				<tr>
-					<td>
-						<table>
-							<tr>
-								<td style="font-size: medium;font-weight:bold;">Variaci&oacute;n desde la &uacute;ltima medici&oacute;n</td>
-								<td style="font-size: large;">${{variacion}}</td>
-							</tr>
-							<tr>
-								<td style="font-size: medium;font-weight:bold;">Variaci&oacute;n total en el lapso de tiempo</td>
-								<td style="font-size: large;">${{variacion_total}}</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-			{{debug}}
-		</div>
+%include header
+<h1 class="title"><a href="http://en.wikipedia.org/wiki/Dolardo">Dolardo</a></h1>
+<p class="sub_title">
+	Cotizaci&oacute;n del D&oacute;lar entre {{fecha_inicio}} y {{fecha_fin}} seg&uacute;n el <a href="{{url_brou}}">BROU</a>.
+</p>
+<div class="grafico_wrapper">
+	<div class="grafico_toolbar">
+		<a class="{{selected30}}" href="/custom/30">30 d&iacute;as</a><a class="{{selected60}}" href="/custom/60">60 d&iacute;as</a><a class="{{selected120}}" href="/custom/120">120 d&iacute;as</a>
 	</div>
-	<div class="footer">
-		<p style="text-align:center; margin:auto;"><a href="http://wiki.github.com/defnull/bottle"><img src="/images/bottle-logo_120x43.png" border="0" /></a></p>
-		<p style="text-align:center; margin:auto;"><a href="http://www.python.org"><img src="/images/python-powered-w-70x28.png" border="0" /></a></p>
-		<p style="text-align:right;font-size:x-small;">C&oacute;digo fuente en <a href="http://code.google.com/p/dolardo/">http://code.google.com/p/dolardo/</a></p>
-		<p style="text-align:right;font-size:x-small;">Copyright (c) 2009 <a href="http://ituland.com">iTULand</a></p>
-	</div>
-	<script type="text/javascript">
-		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<script type="text/javascript">
-		try {
-			var pageTracker = _gat._getTracker("UA-1936647-8");
-			pageTracker._trackPageview();
-		} catch(err) {}
-	</script>
-</body>
-</html>
+	<img src="{{grafico}}" />
+</div>
+<div class="resumen"> 
+	<h2>Cotizaci&oacute;n actual</h2>
+	{{fecha}}
+	<table class="tabla">
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td class="item_big">Compra</td>
+						<td class="valor_big">${{compra}}</td>
+					</tr>
+					<tr>
+						<td class="item_big">Venta</td>
+						<td class="valor_big">${{venta}}</td>
+					</tr>
+				</table>					
+			</td>
+			<td valign="top">
+				<img src="{{img_variacion}}" />
+			</td>
+		<tr>
+		<tr>
+			<td colspan="2">
+				<table>
+					<tr>
+						<td class="item_big" title="Variaci&oacute;n total registrada durante el d&iacute;a.">Variaci&oacute;n en el d&iacute;a</td>
+						<td class="valor_big">${{variacion}}</td>
+					</tr>
+					<tr>
+						<td class="item_big" title="Variaci&oacute;n total registrada en el lapso de tiempo graficado actualmente.">Variaci&oacute;n total</td>
+						<td class="valor_big">${{variacion_total}}</td>
+					</tr>
+					<tr>
+						<td class="item_big">M&iacute;nimo</td>
+						<td class="valor_big">${{variacion_total}}</td>
+					</tr>
+					<tr>
+						<td class="item_big">M&aacute;ximo</td>
+						<td class="valor_big">${{variacion_total}}</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	{{debug}}
+</div>
+<br/>
+<br/>
+%include footer

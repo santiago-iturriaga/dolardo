@@ -7,8 +7,8 @@ Created on Aug 15, 2009
 
 DEBUG = False
 
-sql_connection = "mysql://santiag0_santiag:santiag0@localhost/santiag0_dolardo"
-#sql_connection = "mysql://santiago@localhost/dolardo"
+#sql_connection = "mysql://santiag0_santiag:santiag0@localhost/santiag0_dolardo"
+sql_connection = "mysql://santiago@localhost/dolardo"
 #sql_connection = "sqlite:///cotizaciones.db"
 
 #url_brou = "dolardo/brou-cotizaciones.html"

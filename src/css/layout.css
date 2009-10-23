@@ -1,0 +1,142 @@
+* {
+	margin: 0;
+}
+
+html, body {
+	height: 100%;
+	background-color: #777777;
+	font-family: arial,helvetica,sans-serif;
+	text-align: center;
+}
+
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto 0px;
+      
+	width: 725px; 
+	border-left-style: solid; 
+	border-left-width: 1px; 
+	border-right-style: solid;
+	border-right-width: 1px; 
+	background-color: white; 
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;    
+	text-align:left;
+}
+
+.footer, .push {
+	height: 90px;
+
+	margin: auto;
+	width: 725px; 
+	border-left-style: solid; 
+	border-left-width: 1px; 
+	border-right-style: solid; 
+	border-right-width: 1px; 
+	background-color: white; 
+	padding-top: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 50px;
+	text-align:left;	
+}
+
+.logo {
+	float:left; 
+	margin-top: 10px;
+}
+
+.title {
+	margin-bottom: 10px;
+	margin-top: 25px;
+	margin-left: 70px; 
+	font-family: verdana, tahoma, arial;
+}
+
+.title a {
+	color: black; 
+	text-decoration: none;
+}
+
+.sub_title {
+	margin-top: 20px; 
+	margin-bottom: 10px;
+}
+
+.grafico_wrapper {
+	margin: auto; 
+	text-align: center; 
+	margin-top: 20px; 
+	margin-bottom: 20px;
+}
+
+.grafico_toolbar {
+	text-align: right; 
+	font-size: 0.7em;
+	margin: 5px;
+}
+
+.grafico_toolbar a {
+	text-decoration: none;
+	background-color: #EEEEEE;
+	color: black;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+.grafico_toolbar a.selected {
+	text-decoration: none;
+	background-color: #CCCCCC;
+	color: black;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+.resumen {
+	margin-left: auto; 
+	margin-right: auto; 
+	margin-top: 15px; 
+	text-align: center;
+}
+
+.resumen h2 {
+	margin-bottom: 0px; 
+	padding-bottom: 0px;
+}
+
+.resumen .tabla {
+	text-align: center; 
+	margin: auto;
+}
+
+.resumen .item_big {
+	font-size: large;
+	font-weight: bold;
+	padding-right: 5px;
+}
+
+.resumen .item_med {
+	font-size: medium;
+	font-weight: bold;
+}
+
+.resumen .valor_big {
+	font-size: large;
+}
+
+.footer_logo {
+	text-align:center; 
+	margin:auto;
+}
+
+.footer_text {
+	text-align:right;
+	font-size:x-small;
+}

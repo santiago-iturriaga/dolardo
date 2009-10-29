@@ -76,57 +76,80 @@ def custom(height, width, dias):
     
         (rango_cotizaciones, url_grafica) = cotizaciones
                
-        # Primer y ultima fecha de la lista de cotizaciones.
-        fecha_inicio = rango_cotizaciones[0].fecha
-        fecha_fin = rango_cotizaciones[-1].fecha
-         
-        # Ultima cotizacion de compra/venta.
-        compra = rango_cotizaciones[-1].compra
-        venta = rango_cotizaciones[-1].venta
-        
-        # Variacion entre la ultima y penultima cotizacion.        
-        if len(rango_cotizaciones) >= 2:
-            delta = rango_cotizaciones[-1].compra - rango_cotizaciones[-2].compra
-            delta_total = rango_cotizaciones[-1].compra - rango_cotizaciones[0].compra
+        if len(rango_cotizaciones) > 0:   
+            # Primer y ultima fecha de la lista de cotizaciones.
+            fecha_inicio = rango_cotizaciones[0].fecha
+            fecha_fin = rango_cotizaciones[-1].fecha
+             
+            # Ultima cotizacion de compra/venta.
+            compra = rango_cotizaciones[-1].compra
+            venta = rango_cotizaciones[-1].venta
+            
+            # Max. y min. cotizacion
+            min_compra = rango_cotizaciones[0].compra
+            max_compra = rango_cotizaciones[0].compra
+            min_venta = rango_cotizaciones[0].venta
+            max_venta = rango_cotizaciones[0].venta
+            for cotizacion in rango_cotizaciones:
+                if cotizacion.compra > max_compra:
+                    max_compra = cotizacion.compra
+                elif cotizacion.compra < min_compra:
+                    min_compra = cotizacion.compra
+                    
+                if cotizacion.venta > max_venta:
+                    max_venta = cotizacion.venta
+                elif cotizacion.venta < min_venta:
+                    min_venta = cotizacion.venta
+                            
+            # Variacion entre la ultima y penultima cotizacion.        
+            if len(rango_cotizaciones) >= 2:
+                delta = rango_cotizaciones[-1].compra - rango_cotizaciones[-2].compra
+                delta_total = rango_cotizaciones[-1].compra - rango_cotizaciones[0].compra
+            else:
+                delta = 0
+                delta_total = 0
+                              
+            if delta > 0:
+                imagen_cotizacion = IMAGEN_SUBE
+            elif delta < 0:
+                imagen_cotizacion = IMAGEN_BAJA
+            else:
+                imagen_cotizacion = IMAGEN_IGUAL
+            
+            # Si no hay url de imagen muestro una imagen de error.
+            if len(url_grafica) == 0:
+                url_grafica = '/images/out-of-order.jpg'
+            
+            if DEBUG:
+                debug_html = DEBUG_HTML
+            else:
+                debug_html = ""
+            
+            # Genero el template HTML.
+            return template('index.html', 
+                            
+                            url_brou=url_brou,
+                            fecha_inicio=fecha_inicio.strftime('%d/%m/%Y'),
+                            fecha_fin=fecha_fin.strftime('%d/%m/%Y'),
+                            grafico=url_grafica,
+                            
+                            fecha=fecha_fin.strftime('%d/%m/%Y %H:%M'),
+                            compra=compra,
+                            venta=venta,
+                            variacion=delta,
+                            variacion_total=delta_total,
+                            img_variacion=imagen_cotizacion,
+                            max_compra=max_compra,
+                            min_compra=min_compra,
+                            max_venta=max_venta,
+                            min_venta=min_venta,
+                            
+                            selected30=selected30,
+                            selected60=selected60,
+                            selected120=selected120,
+                            debug=debug_html)
         else:
-            delta = 0
-            delta_total = 0
-                          
-        if delta > 0:
-            imagen_cotizacion = IMAGEN_SUBE
-        elif delta < 0:
-            imagen_cotizacion = IMAGEN_BAJA
-        else:
-            imagen_cotizacion = IMAGEN_IGUAL
-        
-        # Si no hay url de imagen muestro una imagen de error.
-        if len(url_grafica) == 0:
-            url_grafica = '/images/out-of-order.jpg'
-        
-        if DEBUG:
-            debug_html = DEBUG_HTML
-        else:
-            debug_html = ""
-        
-        # Genero el template HTML.
-        return template('index.html', 
-                        
-                        url_brou=url_brou,
-                        fecha_inicio=fecha_inicio.strftime('%d/%m/%Y'),
-                        fecha_fin=fecha_fin.strftime('%d/%m/%Y'),
-                        grafico=url_grafica,
-                        
-                        fecha=fecha_fin.strftime('%d/%m/%Y %H:%M'),
-                        compra=compra,
-                        venta=venta,
-                        variacion=delta,
-                        variacion_total=delta_total,
-                        img_variacion=imagen_cotizacion,
-                        
-                        selected30=selected30,
-                        selected60=selected60,
-                        selected120=selected120,
-                        debug=debug_html)
+            redirect('/error')
     except:
         redirect('/error')
         

@@ -131,6 +131,10 @@ html, body {
 	font-size: large;
 }
 
+.resumen .valor_med {
+	font-size: medium;
+}
+
 .footer_logo {
 	text-align:center; 
 	margin:auto;

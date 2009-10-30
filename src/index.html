@@ -1,12 +1,22 @@
 %include header
+<script type="text/javascript" src="/js/index.js"></script>
 <h1 class="title"><a href="http://en.wikipedia.org/wiki/Dolardo">Dolardo</a></h1>
 <p class="sub_title">
 	Cotizaci&oacute;n del D&oacute;lar para Uruguay entre {{fecha_inicio}} y {{fecha_fin}} seg&uacute;n el <a href="{{url_brou}}">BROU</a>.
 </p>
-<div class="grafico_wrapper">
-	<div class="grafico_toolbar">
-		<a class="{{selected30}}" href="/custom/30">30 d&iacute;as</a><a class="{{selected60}}" href="/custom/60">60 d&iacute;as</a><a class="{{selected120}}" href="/custom/120">120 d&iacute;as</a>
+<div class="grafico_toolbar">
+	<div class="grafico_toolbar_derecha">
+		%for dia in links_dias:
+			<a href="{{dia.url}}" class="{{dia.css}}">{{dia.descripcion}}</a>
+		%end
 	</div>
+	<div class="grafico_toolbar_izquierda">
+		%for moneda in links_monedas:
+			<a href="{{moneda.url}}" class="{{moneda.css}}">{{moneda.nombre}}</a>
+		%end
+	</div>
+</div>
+<div class="grafico_wrapper">
 	<img src="{{grafico}}" />
 </div>
 <div class="resumen"> 
@@ -46,6 +56,7 @@
 						<td class="item_big" title="Variaci&oacute;n total registrada en el lapso de tiempo graficado actualmente.">Variaci&oacute;n total</td>
 						<td class="valor_big">${{variacion_total}}</td>
 					</tr>
+					<tr>&nbsp;</tr>
 					<tr>
 						<td class="item_big">M&iacute;nimo compra</td>
 						<td class="valor_big">${{min_compra}}</td>
@@ -54,6 +65,7 @@
 						<td class="item_big">M&aacute;ximo compra</td>
 						<td class="valor_big">${{max_compra}}</td>
 					</tr>
+					<tr>&nbsp;</tr>
 					<tr>
 						<td class="item_big">M&iacute;nimo venta</td>
 						<td class="valor_big">${{min_venta}}</td>

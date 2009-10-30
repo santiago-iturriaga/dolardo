@@ -74,29 +74,46 @@ html, body {
 }
 
 .grafico_toolbar {
-	text-align: right; 
-	font-size: 0.7em;
-	margin: 5px;
+	background-color: #EEEEEE;
+	
+	font-size: 12px;
+	height: 15px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.grafico_toolbar_izquierda {
+	float: left;
+}
+
+.grafico_toolbar_derecha {
+	float: right; 
 }
 
 .grafico_toolbar a {
 	text-decoration: none;
 	background-color: #EEEEEE;
 	color: black;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	padding-left: 4px;
-	padding-right: 4px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 6px;
 }
 
 .grafico_toolbar a.selected {
 	text-decoration: none;
 	background-color: #CCCCCC;
 	color: black;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	padding-left: 4px;
-	padding-right: 4px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 6px;
 }
 
 .resumen {

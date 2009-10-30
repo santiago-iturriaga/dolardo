@@ -5,8 +5,10 @@
 	<meta name="keywords" content="cotizacion uruguay dolar brou ituland dolardo" />
 	<title>Dolardo</title>
 	<link rel="stylesheet" href="/css/layout.css" />
+	<link rel="stylesheet" href="/css/jquery.divcorners.css" />
 	<script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
-	<script type="text/javascript" src="/js/jquery.divcorners-1.3.2.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.divcorners.min.js"></script>
+	<script type="text/javascript" src="/js/dolardo.js"></script>
 </head>
 <body>
 	<div class="wrapper">

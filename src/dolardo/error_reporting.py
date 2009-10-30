@@ -7,11 +7,16 @@ import sys
 from datetime import datetime
 
 import smtplib
-from dolardo import log_file, smpt_host, smpt_password, smpt_port, smpt_user, smpt_to, smpt_from, smpt_subject
+from dolardo import log_file, smtp_enabled, smpt_host, smpt_password, \
+                    smpt_port, smpt_user, smpt_to, smpt_from, smpt_subject, \
+                    DEBUG
 
 def report(msg):
     now = datetime.now().isoformat()
     full_msg = "[%s]\n%s\n" % (now, msg)
+
+    if DEBUG:
+        print full_msg + '\n'
     
     try:
         write_log(full_msg)
@@ -19,7 +24,7 @@ def report(msg):
         print sys.exc_info()
     
     try:
-        send_mail(full_msg)
+        if smtp_enabled: send_mail(full_msg)
     except:
         print sys.exc_info()
 

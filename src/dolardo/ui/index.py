@@ -6,6 +6,7 @@ Created on Oct 13, 2009
 '''
 
 import sys
+import cgi
 
 from datetime import datetime
 from bottle.bottle import route, template, redirect
@@ -74,14 +75,18 @@ def custom(monedas, height, width, dias):
                
         if len(rango_cotizaciones) > 0:   
             monedas_cotizaciones = []
+            fecha_inicio = datetime.now() 
+            fecha_fin = datetime.now()
             
             for (moneda, rango_cotizacion) in rango_cotizaciones:
                 moneda_cotizacion = MonedaCotizacion()
-                moneda_cotizacion.nombre_moneda = moneda.nombre 
+                moneda_cotizacion.nombre_moneda = escape_html(moneda.nombre)
                 
                 # Primer y ultima fecha de la lista de cotizaciones.
                 moneda_cotizacion.fecha_inicio = rango_cotizacion[0].fecha
                 moneda_cotizacion.fecha_fin = rango_cotizacion[-1].fecha
+                
+                fecha_inicio = min(moneda_cotizacion.fecha_inicio, fecha_inicio)
                  
                 # Ultima cotizacion de compra/venta.
                 moneda_cotizacion.compra = rango_cotizacion[-1].compra
@@ -141,22 +146,25 @@ def custom(monedas, height, width, dias):
             # Genero el template HTML.
             return template('index.html', 
                             
-                            url_brou=url_brou,
-                            fecha_inicio=datetime.now().strftime('%d/%m/%Y'),
-                            fecha_fin=datetime.now().strftime('%d/%m/%Y'),
-                            grafico=url_grafica,
+                            url_brou = url_brou,
+                            fecha_inicio = fecha_inicio.strftime('%d/%m/%Y'),
+                            fecha_fin = fecha_fin.strftime('%d/%m/%Y'),
+                            grafico = url_grafica,
 
-                            monedas_cotizaciones=monedas_cotizaciones,
+                            monedas_cotizaciones = monedas_cotizaciones,
 
-                            links_dias=links_dias,
-                            links_monedas=links_monedas,
+                            links_dias = links_dias,
+                            links_monedas = links_monedas,
 
-                            debug=debug_html)
+                            debug = debug_html)
         else:
             redirect('/error')
     except:
         report_error(sys.exc_info())
         redirect('/error')
+    
+def escape_html(input):
+    return cgi.escape(input).encode('ascii', 'xmlcharrefreplace')
         
 def parse_input(monedas, height, width, dias):
     int_dias = 0
@@ -194,7 +202,7 @@ def render_links(list_dbmonedas, current_monedas, current_height, current_width,
     lista_dias = []
     for (cantidad, descripcion) in grafico_dias:
         if current_dias == cantidad:
-            item_dia = Dia('', descripcion)
+            item_dia = Dia('', escape_html(descripcion))
             item_dia.css = 'selected'
             lista_dias.append(item_dia)
             found_dias = True
@@ -202,7 +210,7 @@ def render_links(list_dbmonedas, current_monedas, current_height, current_width,
             item_dia = Dia(url_link.format(monedas=reduce(lambda x,y: str(x) + '&' + str(y), current_monedas), \
                                            height=current_height, \
                                            width=current_width, \
-                                           dias=cantidad), descripcion)
+                                           dias=cantidad), escape_html(descripcion))
             item_dia.css = ''
             lista_dias.append(item_dia)
     
@@ -217,7 +225,7 @@ def render_links(list_dbmonedas, current_monedas, current_height, current_width,
     for dbmoneda in list_dbmonedas:
         if dbmoneda.moneda_id in current_monedas:
             if (len(current_monedas) == 1):
-                item_moneda = Moneda('', dbmoneda.nombre)
+                item_moneda = Moneda('', escape_html(dbmoneda.nombre))
             else:
                 monedas_sin_current = [item for item in current_monedas if item != dbmoneda.moneda_id]
                 monedas_sin_current_link = reduce(lambda x,y: str(x) + '&' + str(y), monedas_sin_current)
@@ -225,7 +233,7 @@ def render_links(list_dbmonedas, current_monedas, current_height, current_width,
                 item_moneda = Moneda(url_link.format(monedas=monedas_sin_current_link, \
                                                      height=current_height, \
                                                      width=current_width, \
-                                                     dias=current_dias), dbmoneda.nombre)
+                                                     dias=current_dias), escape_html(dbmoneda.nombre))
             item_moneda.css = 'selected'
             lista_monedas.append(item_moneda)
         else:
@@ -236,7 +244,7 @@ def render_links(list_dbmonedas, current_monedas, current_height, current_width,
             item_moneda = Moneda(url_link.format(monedas=monedas_con_current_link, \
                                                  height=current_height, \
                                                  width=current_width, \
-                                                 dias=current_dias), dbmoneda.nombre)
+                                                 dias=current_dias), escape_html(dbmoneda.nombre))
             item_moneda.css = ''
             lista_monedas.append(item_moneda)
                 

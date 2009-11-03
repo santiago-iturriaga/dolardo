@@ -14,6 +14,10 @@ def static_images(filename):
 def static_css(filename):
     send_file(filename, root='css')
 
+@route('/css/images/:filename')
+def static_css(filename):
+    send_file(filename, root='css/images')
+
 @route('/js/:filename')
 def static_css(filename):
     send_file(filename, root='js')

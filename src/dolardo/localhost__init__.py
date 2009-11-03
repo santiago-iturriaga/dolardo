@@ -5,7 +5,7 @@ Created on Aug 15, 2009
 @author: santiago
 '''
 
-DEBUG = True
+DEBUG = False
 
 #sql_connection = "mysql://santiag0_santiag:santiag0@localhost/santiag0_dolardo"
 sql_connection = "mysql://santiago@localhost/dolardo"
@@ -15,7 +15,7 @@ sql_connection = "mysql://santiago@localhost/dolardo"
 url_brou = "http://www.portal.brou.com.uy/web/guest/institucional/cotizaciones"
 parse_moneda_list = (u'Dólar',u'Peso Argentino',u'Real',u'Euro')
 
-grafico_default_monedas = '1&2&3&4'
+grafico_default_monedas = '1'
 grafico_default_days = 30
 grafico_default_height = 700
 grafico_default_width = 400

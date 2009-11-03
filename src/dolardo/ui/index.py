@@ -20,7 +20,7 @@ from dolardo import url_brou, DEBUG, grafico_default_monedas, grafico_default_da
                     grafico_default_height, grafico_default_width, grafico_colores, \
                     grafico_dias
 from dolardo import dolardo_graficar
-from dolardo.error_reporting import report_error
+from dolardo.error_reporting import report_error, write_log
 
 class Dia:
     def __init__(self, url, descripcion):
@@ -127,8 +127,10 @@ def custom(monedas, height, width, dias):
                     moneda_cotizacion.imagen_cotizacion = IMAGEN_BAJA
                 else:
                     moneda_cotizacion.imagen_cotizacion = IMAGEN_IGUAL
-                    
+            
+		if DEBUG: write_log("Formateando fecha...")
                 moneda_cotizacion.fecha = moneda_cotizacion.fecha_fin.strftime('%d/%m/%Y %H:%M')
+		if DEBUG: write_log("OK")
                 monedas_cotizaciones.append(moneda_cotizacion)
             
             # Si no hay url de imagen muestro una imagen de error.
@@ -140,9 +142,13 @@ def custom(monedas, height, width, dias):
             else:
                 debug_html = ""
 
+	    if DEBUG: write_log("Generando links")
+
             # Genero los links para mostrar en la página.
             (links_dias, links_monedas) = render_links(db_monedas, int_monedas, int_height, int_width, int_dias)
-            
+    
+	    if DEBUG: write_log("Todo OK. Genero el template.")
+        
             # Genero el template HTML.
             return template('index.html', 
                             
@@ -164,7 +170,8 @@ def custom(monedas, height, width, dias):
         redirect('/error')
     
 def escape_html(input):
-    return cgi.escape(input).encode('ascii', 'xmlcharrefreplace')
+    #return cgi.escape(input).encode('ascii', 'xmlcharrefreplace')
+    return input
         
 def parse_input(monedas, height, width, dias):
     int_dias = 0

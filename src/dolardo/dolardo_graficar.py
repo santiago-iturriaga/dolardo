@@ -59,6 +59,8 @@ def graficar_cotizaciones(monedas_id, dias, height, width):
     
         session.commit()
     except:
+	error_reporting.write_log("Error leyendo cotizaciones.")
+
         info = sys.exc_info()
         error_reporting.report_error(info)
         print info
@@ -69,12 +71,15 @@ def graficar_cotizaciones(monedas_id, dias, height, width):
     try:
         url = generar_grafica(inicio_rango, fin_rango, rango_cotizaciones, height, width)
     except:
+	error_reporting.write_log("Error generando grafica.")
+
         info = sys.exc_info()
         error_reporting.report_error(info)
         print info
         
         url = ""
-           
+
+    error_reporting.write_log("Grafica generada OK")
     return (rango_cotizaciones, url, monedas)
         
 def split_compra_venta(cotizaciones):
@@ -109,6 +114,7 @@ def generar_grafica(inicio, fin, cotizaciones, height, width):
     rango_fechas = []
     
     # Colección de cotizaciones pocesadas.
+    if DEBUG: error_reporting.write_log("Coleccion de cotizaciones")
     cotizaciones_procesadas = []
     for cotizacion in cotizaciones:
         (moneda, rango_cotizaciones) = cotizacion
@@ -128,6 +134,7 @@ def generar_grafica(inicio, fin, cotizaciones, height, width):
         print int(max_cotizaciones)+1
 
     # Proceso el eje X con las fechas.
+    if DEBUG: error_reporting.write_log("Procesando eje X")
     rango_fechas_axis = []
     rango_fechas_humano = []
     for fecha in rango_fechas:
@@ -144,6 +151,7 @@ def generar_grafica(inicio, fin, cotizaciones, height, width):
     chart = SimpleLineChart(height, width, y_range=(int(min_cotizaciones)-1, int(max_cotizaciones)+1))
 
     # Normalizo las cotizaciones (si hay monedas con mas cantidad de valores que otras les agrego valores vacios)
+    if DEBUG: error_reporting.write_log("Normalizando cotizaciones")
     cotizaciones_normalizadas = []
     for cotizacion_procesada in cotizaciones_procesadas:
         (moneda, rango_cotizaciones, cotizaciones_fechas, cotizaciones_buy, cotizaciones_sell) = cotizacion_procesada
@@ -158,6 +166,7 @@ def generar_grafica(inicio, fin, cotizaciones, height, width):
     leyendas = []
 
     # Genero los datos necesario para
+    if DEBUG: error_reporting.write_log("Cargo los datos en el chart")
     for cotizacion_normalizada in cotizaciones_normalizadas:
         (moneda, rango_cotizaciones, cotizaciones_fechas, cotizaciones_buy, cotizaciones_sell) = cotizacion_normalizada
         
@@ -184,8 +193,8 @@ def generar_grafica(inicio, fin, cotizaciones, height, width):
         y_compra_index = chart.add_data(y_compra)
         y_venta_index = chart.add_data(y_venta)
 
-        leyendas.append(str(moneda.nombre) + ' compra')
-        leyendas.append(str(moneda.nombre) + ' venta')
+        #leyendas.append(str(moneda.nombre) + ' compra')
+        #leyendas.append(str(moneda.nombre) + ' venta')
         
     # Y axis labels
     left_axis = range(int(min_cotizaciones)-1, int(max_cotizaciones)+1+1, 1)

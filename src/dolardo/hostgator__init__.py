@@ -21,7 +21,7 @@ grafico_default_days = 30
 grafico_default_height = 700
 grafico_default_width = 400
 grafico_colores = ['0000FF','00FF00','FF0000','770000','007700','000077','7700FF','77FF77']
-grafico_dias = [(30,'30 días'),(60,'60 días'),(120,'120 días')]
+grafico_dias = [(30,u'30 días'),(60,u'60 días'),(120,u'120 días')]
 
 log_file = 'dolardo.log'
 

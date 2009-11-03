@@ -14,4 +14,6 @@
 </head>
 <body>
 	<div class="wrapper">
+		<img style="float:right;" src="/images/v2.jpg"></img>
 		<img src="/images/diagram_64.png" class="logo" />
+		<h1 class="title"><a href="http://en.wikipedia.org/wiki/Dolardo">Dolardo</a></h1>

@@ -19,68 +19,70 @@
 <div class="grafico_wrapper">
 	<img src="{{grafico}}" />
 </div>
-%for moneda_cotizacion in monedas_cotizaciones:
-	<div class="resumen"> 
+<div class="cotizaciones">
+	%for moneda_cotizacion in monedas_cotizaciones:
 		<h2>Cotizaci&oacute;n {{moneda_cotizacion.nombre_moneda}}</h2>
-		{{moneda_cotizacion.fecha}}
-		<table class="tabla">
-			<tr>
-				<td>
-					<table>
-						<tr>
-							<td class="item_big">Compra</td>
-							<td class="valor_big">${{moneda_cotizacion.compra}}</td>
-						</tr>
-						<tr>
-							<td class="item_big">Venta</td>
-							<td class="valor_big">${{moneda_cotizacion.venta}}</td>
-						</tr>
-					</table>					
-				</td>
-				<td valign="top">
-					<img src="{{moneda_cotizacion.imagen_cotizacion}}" />
-				</td>
-			<tr>
-			<tr>
-				<td colspan="2">
-				&nbsp;
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<table>
-						<tr>
-							<td class="item_big" title="Variaci&oacute;n total registrada durante el d&iacute;a.">Variaci&oacute;n en el d&iacute;a</td>
-							<td class="valor_big">${{moneda_cotizacion.delta}}</td>
-						</tr>
-						<tr>
-							<td class="item_big" title="Variaci&oacute;n total registrada en el lapso de tiempo graficado actualmente.">Variaci&oacute;n total</td>
-							<td class="valor_big">${{moneda_cotizacion.delta_total}}</td>
-						</tr>
-						<tr>&nbsp;</tr>
-						<tr>
-							<td class="item_big">M&iacute;nimo compra</td>
-							<td class="valor_big">${{moneda_cotizacion.min_compra}}</td>
-						</tr>
-						<tr>
-							<td class="item_big">M&aacute;ximo compra</td>
-							<td class="valor_big">${{moneda_cotizacion.max_compra}}</td>
-						</tr>
-						<tr>&nbsp;</tr>
-						<tr>
-							<td class="item_big">M&iacute;nimo venta</td>
-							<td class="valor_big">${{moneda_cotizacion.min_venta}}</td>
-						</tr>
-						<tr>
-							<td class="item_big">M&aacute;ximo venta</td>
-							<td class="valor_big">${{moneda_cotizacion.max_venta}}</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-	</div>
-%end
+		<div class="resumen"> 
+			{{moneda_cotizacion.fecha}}
+			<table class="tabla">
+				<tr>
+					<td>
+						<table>
+							<tr>
+								<td class="item_big">Compra</td>
+								<td class="valor_big">${{moneda_cotizacion.compra}}</td>
+							</tr>
+							<tr>
+								<td class="item_big">Venta</td>
+								<td class="valor_big">${{moneda_cotizacion.venta}}</td>
+							</tr>
+						</table>					
+					</td>
+					<td valign="top">
+						<img src="{{moneda_cotizacion.imagen_cotizacion}}" />
+					</td>
+				<tr>
+				<tr>
+					<td colspan="2">
+					&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<table>
+							<tr>
+								<td class="item_big" title="Variaci&oacute;n total registrada durante el d&iacute;a.">Variaci&oacute;n en el d&iacute;a</td>
+								<td class="valor_big">${{moneda_cotizacion.delta}}</td>
+							</tr>
+							<tr>
+								<td class="item_big" title="Variaci&oacute;n total registrada en el lapso de tiempo graficado actualmente.">Variaci&oacute;n total</td>
+								<td class="valor_big">${{moneda_cotizacion.delta_total}}</td>
+							</tr>
+							<tr>&nbsp;</tr>
+							<tr>
+								<td class="item_big">M&iacute;nimo compra</td>
+								<td class="valor_big">${{moneda_cotizacion.min_compra}}</td>
+							</tr>
+							<tr>
+								<td class="item_big">M&aacute;ximo compra</td>
+								<td class="valor_big">${{moneda_cotizacion.max_compra}}</td>
+							</tr>
+							<tr>&nbsp;</tr>
+							<tr>
+								<td class="item_big">M&iacute;nimo venta</td>
+								<td class="valor_big">${{moneda_cotizacion.min_venta}}</td>
+							</tr>
+							<tr>
+								<td class="item_big">M&aacute;ximo venta</td>
+								<td class="valor_big">${{moneda_cotizacion.max_venta}}</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+	%end
+</div>
 {{debug}}
 <br/>
 <br/>

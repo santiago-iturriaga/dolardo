@@ -6,4 +6,6 @@ $(document).ready(function() {
 		position: "inside",
 		exclude: "top, bottom"
 	});
+	
+	$('.cotizaciones').accordion();
 });

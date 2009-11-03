@@ -128,9 +128,8 @@ def custom(monedas, height, width, dias):
                 else:
                     moneda_cotizacion.imagen_cotizacion = IMAGEN_IGUAL
             
-		if DEBUG: write_log("Formateando fecha...")
+                if DEBUG: write_log("Formateando fecha...")
                 moneda_cotizacion.fecha = moneda_cotizacion.fecha_fin.strftime('%d/%m/%Y %H:%M')
-		if DEBUG: write_log("OK")
                 monedas_cotizaciones.append(moneda_cotizacion)
             
             # Si no hay url de imagen muestro una imagen de error.
@@ -142,12 +141,12 @@ def custom(monedas, height, width, dias):
             else:
                 debug_html = ""
 
-	    if DEBUG: write_log("Generando links")
+            if DEBUG: write_log("Generando links")
 
             # Genero los links para mostrar en la página.
             (links_dias, links_monedas) = render_links(db_monedas, int_monedas, int_height, int_width, int_dias)
     
-	    if DEBUG: write_log("Todo OK. Genero el template.")
+            if DEBUG: write_log("Todo OK. Genero el template.")
         
             # Genero el template HTML.
             return template('index.html', 
@@ -203,7 +202,8 @@ def parse_input(monedas, height, width, dias):
     return (int_dias, int_height, int_width, int_monedas)
 
 def render_links(list_dbmonedas, current_monedas, current_height, current_width, current_dias):
-    url_link = '/custom/{monedas}/{height}/{width}/{dias}/'
+    #url_link = '/custom/{monedas}/{height}/{width}/{dias}/'
+    url_link = '/custom/%(monedas)s/%(height)s/%(width)s/%(dias)s/'
     
     found_dias = False
     lista_dias = []
@@ -214,10 +214,10 @@ def render_links(list_dbmonedas, current_monedas, current_height, current_width,
             lista_dias.append(item_dia)
             found_dias = True
         else:
-            item_dia = Dia(url_link.format(monedas=reduce(lambda x,y: str(x) + '&' + str(y), current_monedas), \
-                                           height=current_height, \
-                                           width=current_width, \
-                                           dias=cantidad), escape_html(descripcion))
+            item_dia = Dia(url_link % {'monedas':reduce(lambda x,y: str(x) + '&' + str(y), current_monedas), \
+                                       'height':current_height, \
+                                       'width':current_width, \
+                                       'dias':cantidad}, escape_html(descripcion))
             item_dia.css = ''
             lista_dias.append(item_dia)
     
@@ -236,11 +236,11 @@ def render_links(list_dbmonedas, current_monedas, current_height, current_width,
             else:
                 monedas_sin_current = [item for item in current_monedas if item != dbmoneda.moneda_id]
                 monedas_sin_current_link = reduce(lambda x,y: str(x) + '&' + str(y), monedas_sin_current)
-                
-                item_moneda = Moneda(url_link.format(monedas=monedas_sin_current_link, \
-                                                     height=current_height, \
-                                                     width=current_width, \
-                                                     dias=current_dias), escape_html(dbmoneda.nombre))
+
+                item_moneda = Moneda(url_link % {'monedas':monedas_sin_current_link, \
+                                                'height':current_height, \
+                                                'width':current_width, \
+                                                'dias':current_dias}, escape_html(dbmoneda.nombre))                
             item_moneda.css = 'selected'
             lista_monedas.append(item_moneda)
         else:
@@ -248,10 +248,10 @@ def render_links(list_dbmonedas, current_monedas, current_height, current_width,
             monedas_con_current.append(dbmoneda.moneda_id)
             monedas_con_current_link = reduce(lambda x,y: str(x) + '&' + str(y), monedas_con_current)
             
-            item_moneda = Moneda(url_link.format(monedas=monedas_con_current_link, \
-                                                 height=current_height, \
-                                                 width=current_width, \
-                                                 dias=current_dias), escape_html(dbmoneda.nombre))
+            item_moneda = Moneda(url_link % {'monedas':monedas_con_current_link, \
+                                            'height':current_height, \
+                                            'width':current_width, \
+                                            'dias':current_dias}, escape_html(dbmoneda.nombre))                
             item_moneda.css = ''
             lista_monedas.append(item_moneda)
                 

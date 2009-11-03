@@ -59,7 +59,7 @@ def graficar_cotizaciones(monedas_id, dias, height, width):
     
         session.commit()
     except:
-	error_reporting.write_log("Error leyendo cotizaciones.")
+        if DEBUG: error_reporting.write_log("Error leyendo cotizaciones.")
 
         info = sys.exc_info()
         error_reporting.report_error(info)
@@ -71,7 +71,7 @@ def graficar_cotizaciones(monedas_id, dias, height, width):
     try:
         url = generar_grafica(inicio_rango, fin_rango, rango_cotizaciones, height, width)
     except:
-	error_reporting.write_log("Error generando grafica.")
+        if DEBUG: error_reporting.write_log("Error generando grafica.")
 
         info = sys.exc_info()
         error_reporting.report_error(info)
@@ -79,7 +79,7 @@ def graficar_cotizaciones(monedas_id, dias, height, width):
         
         url = ""
 
-    error_reporting.write_log("Grafica generada OK")
+    if DEBUG: error_reporting.write_log("Grafica generada OK")
     return (rango_cotizaciones, url, monedas)
         
 def split_compra_venta(cotizaciones):

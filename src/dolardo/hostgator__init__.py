@@ -5,7 +5,7 @@ Created on Aug 15, 2009
 @author: santiago
 '''
 
-DEBUG = True
+DEBUG = False
 
 sql_connection = "mysql://santiag0_santiag:santiag0@localhost/santiag0_dolardo"
 

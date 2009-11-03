@@ -31,6 +31,10 @@ class Moneda:
         self.url = url
         self.nombre = nombre
 
+class MonedaCotizacion:
+    def __init__(self):
+        pass
+    
 @route('/')
 def index():
     redirect('/default/')
@@ -69,44 +73,58 @@ def custom(monedas, height, width, dias):
         (rango_cotizaciones, url_grafica, db_monedas) = cotizaciones
                
         if len(rango_cotizaciones) > 0:   
-            # Primer y ultima fecha de la lista de cotizaciones.
-            fecha_inicio = datetime.now() #rango_cotizaciones[0].fecha
-            fecha_fin = datetime.now() #rango_cotizaciones[-1].fecha
-             
-            # Ultima cotizacion de compra/venta.
-            compra = '' #rango_cotizaciones[-1].compra
-            venta = '' #rango_cotizaciones[-1].venta
+            monedas_cotizaciones = []
             
-            # Max. y min. cotizacion
-            min_compra = '' #rango_cotizaciones[0].compra
-            max_compra = '' #rango_cotizaciones[0].compra
-            min_venta = '' #rango_cotizaciones[0].venta
-            max_venta = '' #rango_cotizaciones[0].venta
-            #for cotizacion in rango_cotizaciones:
-            #    if cotizacion.compra > max_compra:
-            #        max_compra = cotizacion.compra
-            #    elif cotizacion.compra < min_compra:
-            #        min_compra = cotizacion.compra
-            #        
-            #    if cotizacion.venta > max_venta:
-            #        max_venta = cotizacion.venta
-            #    elif cotizacion.venta < min_venta:
-            #        min_venta = cotizacion.venta
-                            
-            # Variacion entre la ultima y penultima cotizacion.        
-            if len(rango_cotizaciones) >= 2:
-                delta = 0 #rango_cotizaciones[-1].compra - rango_cotizaciones[-2].compra
-                delta_total = 0 #rango_cotizaciones[-1].compra - rango_cotizaciones[0].compra
-            else:
-                delta = 0
-                delta_total = 0
-                              
-            if delta > 0:
-                imagen_cotizacion = IMAGEN_SUBE
-            elif delta < 0:
-                imagen_cotizacion = IMAGEN_BAJA
-            else:
-                imagen_cotizacion = IMAGEN_IGUAL
+            for (moneda, rango_cotizacion) in rango_cotizaciones:
+                moneda_cotizacion = MonedaCotizacion()
+                moneda_cotizacion.nombre_moneda = moneda.nombre 
+                
+                # Primer y ultima fecha de la lista de cotizaciones.
+                moneda_cotizacion.fecha_inicio = rango_cotizacion[0].fecha
+                moneda_cotizacion.fecha_fin = rango_cotizacion[-1].fecha
+                 
+                # Ultima cotizacion de compra/venta.
+                moneda_cotizacion.compra = rango_cotizacion[-1].compra
+                moneda_cotizacion.venta = rango_cotizacion[-1].venta
+                
+                # Max. y min. cotizacion
+                min_compra = rango_cotizacion[0].compra
+                max_compra = rango_cotizacion[0].compra
+                min_venta = rango_cotizacion[0].venta
+                max_venta = rango_cotizacion[0].venta
+                for cotizacion in rango_cotizacion:
+                    if cotizacion.compra > max_compra:
+                        max_compra = cotizacion.compra
+                    elif cotizacion.compra < min_compra:
+                        min_compra = cotizacion.compra
+                        
+                    if cotizacion.venta > max_venta:
+                        max_venta = cotizacion.venta
+                    elif cotizacion.venta < min_venta:
+                        min_venta = cotizacion.venta
+                           
+                moneda_cotizacion.min_compra = min_compra
+                moneda_cotizacion.max_compra = max_compra
+                moneda_cotizacion.min_venta = min_venta
+                moneda_cotizacion.max_venta = max_venta
+                               
+                # Variacion entre la ultima y penultima cotizacion.        
+                if len(rango_cotizacion) >= 2:
+                    moneda_cotizacion.delta = rango_cotizacion[-1].compra - rango_cotizacion[-2].compra
+                    moneda_cotizacion.delta_total = rango_cotizacion[-1].compra - rango_cotizacion[0].compra
+                else:
+                    moneda_cotizacion.delta = 0
+                    moneda_cotizacion.delta_total = 0
+                                  
+                if moneda_cotizacion.delta > 0:
+                    moneda_cotizacion.imagen_cotizacion = IMAGEN_SUBE
+                elif moneda_cotizacion.delta < 0:
+                    moneda_cotizacion.imagen_cotizacion = IMAGEN_BAJA
+                else:
+                    moneda_cotizacion.imagen_cotizacion = IMAGEN_IGUAL
+                    
+                moneda_cotizacion.fecha = moneda_cotizacion.fecha_fin.strftime('%d/%m/%Y %H:%M')
+                monedas_cotizaciones.append(moneda_cotizacion)
             
             # Si no hay url de imagen muestro una imagen de error.
             if len(url_grafica) == 0:
@@ -124,20 +142,11 @@ def custom(monedas, height, width, dias):
             return template('index.html', 
                             
                             url_brou=url_brou,
-                            fecha_inicio=fecha_inicio.strftime('%d/%m/%Y'),
-                            fecha_fin=fecha_fin.strftime('%d/%m/%Y'),
+                            fecha_inicio=datetime.now().strftime('%d/%m/%Y'),
+                            fecha_fin=datetime.now().strftime('%d/%m/%Y'),
                             grafico=url_grafica,
-                            
-                            fecha=fecha_fin.strftime('%d/%m/%Y %H:%M'),
-                            compra=compra,
-                            venta=venta,
-                            variacion=delta,
-                            variacion_total=delta_total,
-                            img_variacion=imagen_cotizacion,
-                            max_compra=max_compra,
-                            min_compra=min_compra,
-                            max_venta=max_venta,
-                            min_venta=min_venta,
+
+                            monedas_cotizaciones=monedas_cotizaciones,
 
                             links_dias=links_dias,
                             links_monedas=links_monedas,

@@ -19,6 +19,7 @@ from dolardo import error_reporting
 from pygooglechart.pygooglechart import Chart
 from pygooglechart.pygooglechart import XYLineChart
 from pygooglechart.pygooglechart import Axis
+from pygooglechart.pygooglechart import SimpleLineChart
 
 def graficar_cotizaciones(monedas_id, dias, height, width):
     # Represento 30 días en la gráfica. 
@@ -140,9 +141,7 @@ def generar_grafica(inicio, fin, cotizaciones, height, width):
         else:
             rango_fechas_humano.append(fecha.strftime(formato_fecha_humano))
 
-    chart = XYLineChart(height, width,
-                        x_range=(min(rango_fechas_axis), max(rango_fechas_axis)), 
-                        y_range=(int(min_cotizaciones)-1, int(max_cotizaciones)+1))
+    chart = SimpleLineChart(height, width, y_range=(int(min_cotizaciones)-1, int(max_cotizaciones)+1))
 
     # Normalizo las cotizaciones (si hay monedas con mas cantidad de valores que otras les agrego valores vacios)
     cotizaciones_normalizadas = []
@@ -172,15 +171,17 @@ def generar_grafica(inicio, fin, cotizaciones, height, width):
             cotizacion_sell = cotizaciones_sell[index]
             fecha_axis = rango_fechas_axis[index]
             
-            x_compra.append(fecha_axis)
+            x_compra.append(index)
             y_compra.append(cotizacion_buy)
             
             x_venta.append(fecha_axis)
             y_venta.append(cotizacion_sell)
 
-        x_compra_index = chart.add_data(x_compra)
+        if DEBUG:
+            print x_compra
+            print y_compra
+
         y_compra_index = chart.add_data(y_compra)
-        x_venta_index = chart.add_data(x_compra)
         y_venta_index = chart.add_data(y_venta)
 
         leyendas.append(str(moneda.nombre) + ' compra')
@@ -200,12 +201,6 @@ def generar_grafica(inicio, fin, cotizaciones, height, width):
     # Set the line colours
     chart.set_colours(grafico_colores)
     
-    #titulo = "Cotización del Dólar entre %s y %s" % (cotizaciones[0].fecha.strftime(formato_fecha_humano), 
-    #                                                 cotizaciones[-1].fecha.strftime(formato_fecha_humano))
-    #title_axis_index = chart.set_axis_labels(Axis.BOTTOM, [titulo])
-    #chart.set_axis_style(title_axis_index, '202020', font_size=10, alignment=0)
-    #chart.set_axis_positions(title_axis_index, [50])
-
     # Set the vertical stripes
     chart.fill_linear_stripes(Chart.CHART, 0, 'CCCCCC', 0.1, 'FFFFFF', 0.1)
 

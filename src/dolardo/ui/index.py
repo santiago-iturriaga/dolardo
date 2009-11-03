@@ -169,8 +169,10 @@ def custom(monedas, height, width, dias):
         redirect('/error')
     
 def escape_html(input):
-    #return cgi.escape(input).encode('ascii', 'xmlcharrefreplace')
-    return input
+    if (type(input) == unicode):
+        return cgi.escape(input).encode('ascii', 'xmlcharrefreplace')
+    else:
+        return cgi.escape(input)
         
 def parse_input(monedas, height, width, dias):
     int_dias = 0

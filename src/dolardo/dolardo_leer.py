@@ -13,7 +13,8 @@ from sqlalchemy.sql.expression import cast
 from sqlalchemy import create_engine, Date
 from sqlalchemy.orm import sessionmaker
 
-from dolardo import DEBUG, parse_moneda_list, brou, Base, sql_connection
+from dolardo import DEBUG, parse_moneda_list, brou, sql_connection
+from dolardo.entities import Base
 from dolardo.entities.cotizacion import Cotizacion
 from dolardo.entities.moneda import Moneda
 from dolardo import error_reporting

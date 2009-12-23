@@ -11,7 +11,8 @@ from datetime import datetime, timedelta
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from dolardo import brou, Base, DEBUG, sql_connection, grafico_colores
+from dolardo import brou, DEBUG, sql_connection, grafico_colores
+from dolardo.entities import Base
 from dolardo.entities.cotizacion import Cotizacion
 from dolardo.entities.moneda import Moneda
 from dolardo import error_reporting

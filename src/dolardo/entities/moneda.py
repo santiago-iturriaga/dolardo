@@ -7,7 +7,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey, Unicode
 from sqlalchemy.orm import relation, backref
 
-from dolardo import Base
+from dolardo.entities import Base
 
 class Moneda(Base):
 

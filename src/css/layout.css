@@ -78,18 +78,19 @@ html, body {
 	
 	font-size: 12px;
 	height: 15px;
-	margin-left: 5px;
-	margin-right: 5px;
+
+	margin-left: -10px;
+	margin-right: -10px;
 	margin-bottom: 0px;
 	margin-top: 20px;
 	padding-top: 4px;
 	padding-bottom: 4px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 0px;
+	padding-right: 0px;
+	
 }
 
 .grafico_toolbar_izquierda {
-	/*float: left;*/
 }
 
 .grafico_toolbar_derecha {
@@ -108,6 +109,16 @@ html, body {
 
 .grafico_toolbar a.selected {
 	text-decoration: none;
+	background-color: #CCCCCC;
+	color: black;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+
+.grafico_toolbar a:hover {
+	text-decoration: underline;
 	background-color: #CCCCCC;
 	color: black;
 	padding-top: 4px;

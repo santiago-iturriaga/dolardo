@@ -5,9 +5,9 @@ Created on Oct 13, 2009
 '''
 
 from bottle.bottle import run
-from dolardo import sql_connection
+from dolardo import PRODUCTION
 from dolardo.ui import index, static, error
 
 if __name__ == '__main__':
-    sql_connection = "mysql://santiago@localhost/dolardo"
+    PRODUCTION = False
     run(host='localhost', port=8080)

@@ -8,4 +8,9 @@
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
+	<url>
+		<loc>http://dolardo.ituland.com/default/</loc>
+		<changefreq>daily</changefreq>
+		<priority>1.0</priority>
+	</url>
 </urlset>
